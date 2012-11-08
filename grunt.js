@@ -5,7 +5,10 @@ module.exports = function (grunt) {
     
     text_replace: {
       default: {
-        files: ['**/*.txt'],
+        files: {
+          src:  ['*.txt'],
+          dest: 'foo.txt'
+        },
         
         options: {
           regex: true
@@ -15,6 +18,10 @@ module.exports = function (grunt) {
           {
             from: 'Hello', 
             to: 'Good bye' 
+          },
+          {
+            from: 'Pleased', 
+            to: 'Delighted' 
           }
         ]
 
@@ -23,11 +30,26 @@ module.exports = function (grunt) {
 
   });
 
-
+  grunt.registerTask('default', 'text_replace');
 
   grunt.registerMultiTask('text_replace', 'A description', function () {
-    console.log('TASK')
-    grunt.log.writeln(this.target + ': ' + JSON.stringify(this.data));
+    var allSourceFiles = this.data.files.src,
+        allSourceFilePaths = grunt.file.expandFiles(allSourceFiles),
+        pathToDestinationDirectory = this.data.files.dest;
+
+    var allReplacements = this.data.replacements;
+
+    allSourceFilePaths.forEach(function (pathToFile) {
+      grunt.file.copy(pathToFile, pathToDestinationDirectory, {
+        process: function (fileContents) {
+          allReplacements.forEach(function (replacement) {
+            console.log(replacement)
+            fileContents = fileContents.replace(replacement.from, replacement.to);
+          })
+          return fileContents;
+        }
+      });
+    })
   });
 
 };
