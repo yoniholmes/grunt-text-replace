@@ -1,6 +1,6 @@
 {
   "name": "grunt-text-replace",
-  "description": "General purpose text-replacement tool for grunt",
+  "description": "General purpose text-replacement for grunt",
   "version": "0.0.2",
   "author": "Jonathan Holmes",
   "repository": {

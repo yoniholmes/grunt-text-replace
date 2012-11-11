@@ -1,4 +1,5 @@
 module.exports = function (grunt) {
+  "use strict";
 
   // Project configuration.
   grunt.initConfig({
@@ -24,6 +25,7 @@ module.exports = function (grunt) {
         es5: true
       },
       globals: {}
+    }
   });
 
   // Load local tasks.

@@ -1,43 +1,48 @@
 # grunt-text-replace
-General purpose text-replacement tool for grunt.
+General purpose text-replacement for grunt.
 
-## About this plugin
+## About
+
+This plugin automates the process of replacing text in files.
+
+`RegEx` and `String` replacements are supported. 
+
+See the examples below for details.
 
 
-This plugin can be used to automate the process of replacing text in x`files.
+## Installation
 
-`RegEx` and `String` replacements are supported.
-
-
-## Getting Started
-
-### Installation
-
-Install this grunt plugin next to your project's [grunt.js gruntfile][getting_started] with: `npm install grunt-text-replace`
-
-Then add this line to your project's `grunt.js` gruntfile:
+1. Next to your project's [grunt.js gruntfile][getting_started] run: 
+`npm install grunt-text-replace`
+1. Then add this line to your project's `grunt.js` gruntfile:
 
 ```javascript
-grunt.loadNpmTasks('grunt-plugin');
+grunt.loadNpmTasks('grunt-text-replace');
 ```
 
 [grunt]: http://gruntjs.com/
 [getting_started]: https://github.com/gruntjs/grunt/blob/master/docs/getting_started.md
 
 
-### Example uses
+## Usage
 
 I'll show you how it's used through comprehensive examples:
+
+#### `src` 
+
+(array) Source
+
+#### `dest` (string)
+
+#### `overwrite`: `boolean`
 
 #### String replacement
 
     grunt.initConfig({
       replace: {
         example: {
-          files: {
-            src: ['myFile.txt'],
-            dest: 'myFileModified.txt'
-          },
+          src: ['myFile.txt'],
+          dest: 'myFileModified.txt'
           replacements: [{
             from: "Hello",
             to: "Good bye"
@@ -53,14 +58,8 @@ I'll show you how it's used through comprehensive examples:
 
 
 
-## Documentation
-_(Coming soon)_
-
-## Contributing
-In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [grunt][grunt].
-
 ## Release History
-_(Nothing yet)_
+Current version:  0.0.1
 
 ## License
 Copyright (c) 2012 Jonathan Holmes  
