@@ -1,43 +1,35 @@
 module.exports = function (grunt) {
 
-  var path = require('path');
-
+  // Project configuration.
   grunt.initConfig({
-    
-    replace: {
-      target: {
-        files: {
-          src:  ['*.txt', 'test/test.txt'],
-          dest: 'foo/'
-        },
-
-//        overwrite: true,
-        
-        replacements: [
-          { from: 'Hello', to: 'Good bye' },
-          { from: 'Pleased', to: 'Delighted' }
-        ]
-
+    test: {
+      files: ['test/**/*.js']
+    },
+    lint: {
+      files: ['grunt.js', 'tasks/**/*.js', 'test/**/*.js']
+    },
+    jshint: {
+      options: {
+        curly: true,
+        eqeqeq: true,
+        immed: true,
+        latedef: true,
+        newcap: true,
+        noarg: true,
+        sub: true,
+        undef: true,
+        boss: true,
+        eqnull: true,
+        node: true,
+        es5: true
       },
-
-      // regex_test: {
-      //   files: {
-      //     src: ['test/test2.txt'],
-      //     dest: 'foo/regex.txt'
-      //   },
-
-      //   replacements: [
-      //     { from: /(.)at/g, to: '$1$1$1at' }
-      //   ]
-      // }
-    }
-
+      globals: {}
   });
 
-  grunt.loadTasks('tasks')
+  // Load local tasks.
+  grunt.loadTasks('tasks');
 
-  // grunt.registerTask('default', 'replace');
-
-  
+  // Default task.
+  grunt.registerTask('default', 'lint test');
 
 };

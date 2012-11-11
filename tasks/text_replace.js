@@ -1,13 +1,16 @@
-var path = require('path');
+// Copyright (c) 2012 Jonathan Holmes. 
+// Licensed under the MIT license. 
 
 module.exports = function (grunt) {
 
+var path = require('path');
+
   grunt.registerMultiTask('replace', 'A description', function () {
 
-    var allSourceFiles = this.data.files.src,
+    var allSourceFiles = this.data.src,
         allSourceFilePaths = grunt.file.expandFiles(allSourceFiles),
         allReplacements = this.data.replacements,
-        pathToDestination = this.data.files.dest,
+        pathToDestination = this.data.dest,
         isOverwriteTrue = (typeof this.data.overwrite !== 'undefined') && this.data.overwrite,
         isDestinationDefined = typeof pathToDestination !== 'undefined',
         isDirectory = /\/$/.test(pathToDestination),
