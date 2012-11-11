@@ -1,55 +1,43 @@
 module.exports = function (grunt) {
 
+  var path = require('path');
+
   grunt.initConfig({
-
     
-    text_replace: {
-      default: {
+    replace: {
+      target: {
         files: {
-          src:  ['*.txt'],
-          dest: 'foo.txt'
-        },
-        
-        options: {
-          regex: true
+          src:  ['*.txt', 'test/test.txt'],
+          dest: 'foo/'
         },
 
+//        overwrite: true,
+        
         replacements: [
-          {
-            from: 'Hello', 
-            to: 'Good bye' 
-          },
-          {
-            from: 'Pleased', 
-            to: 'Delighted' 
-          }
+          { from: 'Hello', to: 'Good bye' },
+          { from: 'Pleased', to: 'Delighted' }
         ]
 
-      }
+      },
+
+      // regex_test: {
+      //   files: {
+      //     src: ['test/test2.txt'],
+      //     dest: 'foo/regex.txt'
+      //   },
+
+      //   replacements: [
+      //     { from: /(.)at/g, to: '$1$1$1at' }
+      //   ]
+      // }
     }
 
   });
 
-  grunt.registerTask('default', 'text_replace');
+  grunt.loadTasks('tasks')
 
-  grunt.registerMultiTask('text_replace', 'A description', function () {
-    var allSourceFiles = this.data.files.src,
-        allSourceFilePaths = grunt.file.expandFiles(allSourceFiles),
-        pathToDestinationDirectory = this.data.files.dest;
+  // grunt.registerTask('default', 'replace');
 
-    var allReplacements = this.data.replacements;
-
-    allSourceFilePaths.forEach(function (pathToFile) {
-      grunt.file.copy(pathToFile, pathToDestinationDirectory, {
-        process: function (fileContents) {
-          allReplacements.forEach(function (replacement) {
-            console.log(replacement)
-            fileContents = fileContents.replace(replacement.from, replacement.to);
-          })
-          return fileContents;
-        }
-      });
-    })
-  });
+  
 
 };

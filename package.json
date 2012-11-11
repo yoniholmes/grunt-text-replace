@@ -1,0 +1,28 @@
+{
+  "name": "grunt-text-replace",
+  "version": "0.0.2",
+  "readmeFilename": "README.md",
+  "description": "Text",
+  "main": "grunt.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://yoniholmes@bitbucket.org/yoniholmes/grunt-text-replace.git"
+  },
+  "keywords": [
+    "text",
+    "replace",
+    "regex",
+    "gruntplugin"
+  ],
+  "author": "Jonathan Holmes",
+  "license": "BSD",
+  "dependencies": {
+    "grunt": "~0.3.17"
+  }
+}
