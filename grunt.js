@@ -32,7 +32,7 @@ module.exports = function (grunt) {
         dest: 'test/modified/',
         replacements: [{
           from: "Hello",
-          to: "Good bye"
+          to: "Good bye on <%= grunt.template.today('yyyy-mm-dd') %>"
         }]
       },
       overwriting: {

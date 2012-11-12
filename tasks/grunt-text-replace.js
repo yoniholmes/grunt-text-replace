@@ -140,7 +140,7 @@ plugin = {
 
   failIfNoSourceFilesFound: function () {
     if (this.isSourceDefined === false || this.sourceFilePaths.length === 0) {
-        grunt.warn(this.errorMessages.noSourceFiles);
+      grunt.warn(this.errorMessages.noSourceFiles);
     }
   },
 
@@ -160,7 +160,7 @@ plugin = {
   makeReplacementsToFile: function (pathToFile) {
     var pathToWriteTo = this.getWriteToPathForFile(pathToFile);      
     grunt.file.copy(pathToFile, pathToWriteTo, {
-      process: this.makeReplacementsToText
+      process: this.makeReplacementsToGivenText
     });
   },
 
@@ -176,10 +176,19 @@ plugin = {
     return destination;
   },
 
-  makeReplacementsToText: function (fileContents) {
+  makeReplacementsToGivenText: function (fileContents) {
+    var replacedContents = fileContents;
     plugin.replacements.forEach(function (replacement) {
-      fileContents = fileContents.replace(replacement.from, replacement.to);
+      var replaceFromText = replacement.from,
+          replaceToText = replacement.to;
+      if (typeof replaceToText === 'string') {
+        replaceToText = grunt.template.process(replaceToText);
+      }
+      replacedContents = replacedContents.replace(
+        replaceFromText, replaceToText);
     });
-    return fileContents;
-  }
+    return replacedContents;
+  },
+
+
 };
