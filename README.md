@@ -51,11 +51,10 @@ name anything you like.
 ##### Examples
 
 ```javascript
-// Valid values for 'src':
-  ['test.txt']             // matches the files 'test.txt' only
-  ['test/*.html']          // matches all html files inside the folder 'test'
-  ['**/*.js']              // matches all .js files inside all subdirctories 
-  ['test.txt', '**/*.js']  // a combination of two of the above
+  src: ['test.txt']             // matches the files 'test.txt' only
+  src: ['test/*.html']          // matches all html files inside the folder 'test'
+  src: ['**/*.js']              // matches all .js files inside all subdirctories 
+  src: ['test.txt', '**/*.js']  // a combination of two of the above
 ```
 
 [minimatch]: https://github.com/isaacs/minimatch
@@ -80,6 +79,9 @@ a single file.
 #### overwrite
 
 **Boolean**. *A switch to allow `grunt-replace-text` to rewrite original files.*
+
+`overwrite` can only be used when a `dest` is not defined, otherwise 
+`grunt-text-replace` will throw an error.
 
 
 #### `overwrite`: `boolean`
