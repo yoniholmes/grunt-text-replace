@@ -136,12 +136,6 @@ Boolean. *A switch to allow `grunt-replace-text` to rewrite original files.*
 **overwrite** can only be used when a **dest** is not defined, otherwise 
 **grunt-text-replace** will throw an error.
 
-Examples of valid **overwrite** values:
-
-```javascript 
-overwrite: true
-overwrite: false
-```
 
 
 ### replacements
@@ -194,7 +188,7 @@ For examples, see [replacements](#replacements) above.
 
 
 ## Release History
-Current version:  0.1.5
+Current version:  0.1.7
 
 
 
