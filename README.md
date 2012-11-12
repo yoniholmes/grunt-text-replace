@@ -30,7 +30,7 @@ grunt.loadNpmTasks('grunt-text-replace');
 
 ---
 
-#### replace
+### replace
 
 **Object**. *The top level grunt task.* 
 
@@ -42,13 +42,13 @@ name anything you like.
 
 ---
 
-#### src
+### src
 
 **Array**. *The source of the files that require text replacement.*
 
 `src` must be defined within each target. `src` supports [minimatch][minimatch] paths.
 
-##### Examples
+#### Examples
 
 ```javascript
   src: ['test.txt']             // matches the files 'test.txt' only
@@ -61,7 +61,7 @@ name anything you like.
 
 ---
 
-#### dest
+### dest 
 
 **String**. *The destination for those files that have been replaced.*
 
@@ -69,14 +69,14 @@ name anything you like.
 `grunt-text-replace` will throw an error if multiple source files are mapped to
 a single file. 
 
-##### Examples
+#### Examples
 
 ```javascript 
-  'output.txt'             // sends the replaced file to 'output.txt' inside the grunt.js directory
-  'output/'                // sends the replace files/s to a directory called 'output'
+  dest: 'output.txt'             // sends the replaced file to 'output.txt' inside the grunt.js directory
+  dest: 'output/'                // sends the replace files/s to a directory called 'output'
 ```
 
-#### overwrite
+### overwrite
 
 **Boolean**. *A switch to allow `grunt-replace-text` to rewrite original files.*
 
