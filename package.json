@@ -1,7 +1,7 @@
 {
   "name": "grunt-text-replace",
   "description": "General purpose text-replacement for grunt",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "author": "Jonathan Holmes",
   "repository": {
     "type": "git",
