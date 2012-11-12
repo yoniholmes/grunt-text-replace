@@ -1,0 +1,110 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'publish' ]
+2 info using npm@1.1.65
+3 info using node@v0.8.5
+4 verbose publish [ '.' ]
+5 verbose read json /Users/Yoni/Sites/Experiments/JavaScript/grunt-text-replace/package.json
+6 verbose cache add [ '.', null ]
+7 silly cache add name=undefined spec="." args=[".",null]
+8 verbose parsed url { pathname: '.', path: '.', href: '.' }
+9 silly lockFile 3a52ce78- .
+10 verbose lock . /Users/Yoni/.npm/3a52ce78-.lock
+11 verbose read json package.json
+12 verbose tar pack [ '/var/folders/Dq/DqAU2AFEGrWDlTG3EL0dk++++TI/-Tmp-/npm-13891/1352740226549-0.6973964809440076/tmp.tgz',
+12 verbose tar pack   '.' ]
+13 verbose tarball /var/folders/Dq/DqAU2AFEGrWDlTG3EL0dk++++TI/-Tmp-/npm-13891/1352740226549-0.6973964809440076/tmp.tgz
+14 verbose folder .
+15 info prepublish grunt-text-replace@0.1.3
+16 silly lockFile 69abf43d-26549-0-6973964809440076-tmp-tgz /var/folders/Dq/DqAU2AFEGrWDlTG3EL0dk++++TI/-Tmp-/npm-13891/1352740226549-0.6973964809440076/tmp.tgz
+17 verbose lock /var/folders/Dq/DqAU2AFEGrWDlTG3EL0dk++++TI/-Tmp-/npm-13891/1352740226549-0.6973964809440076/tmp.tgz /Users/Yoni/.npm/69abf43d-26549-0-6973964809440076-tmp-tgz.lock
+18 silly lockFile 69abf43d-26549-0-6973964809440076-tmp-tgz /var/folders/Dq/DqAU2AFEGrWDlTG3EL0dk++++TI/-Tmp-/npm-13891/1352740226549-0.6973964809440076/tmp.tgz
+19 verbose tar unpack /var/folders/Dq/DqAU2AFEGrWDlTG3EL0dk++++TI/-Tmp-/npm-13891/1352740226549-0.6973964809440076/tmp.tgz
+20 silly lockFile 80231129-26549-0-6973964809440076-package /var/folders/Dq/DqAU2AFEGrWDlTG3EL0dk++++TI/-Tmp-/npm-13891/1352740226549-0.6973964809440076/package
+21 verbose lock /var/folders/Dq/DqAU2AFEGrWDlTG3EL0dk++++TI/-Tmp-/npm-13891/1352740226549-0.6973964809440076/package /Users/Yoni/.npm/80231129-26549-0-6973964809440076-package.lock
+22 silly gunzTarPerm modes [ '755', '644' ]
+23 silly gunzTarPerm extractEntry package.json
+24 silly gunzTarPerm extractEntry .npmignore
+25 silly gunzTarPerm extractEntry README.md
+26 silly gunzTarPerm extractEntry grunt.js
+27 silly gunzTarPerm extractEntry bin/grunt-plugin
+28 silly gunzTarPerm extractEntry LICENSE-MIT
+29 silly gunzTarPerm extractEntry tasks/grunt-text-replace.js
+30 silly gunzTarPerm extractEntry test/modified/test.txt
+31 silly gunzTarPerm extractEntry test/test.txt
+32 verbose read json /var/folders/Dq/DqAU2AFEGrWDlTG3EL0dk++++TI/-Tmp-/npm-13891/1352740226549-0.6973964809440076/package/package.json
+33 silly lockFile 80231129-26549-0-6973964809440076-package /var/folders/Dq/DqAU2AFEGrWDlTG3EL0dk++++TI/-Tmp-/npm-13891/1352740226549-0.6973964809440076/package
+34 verbose from cache /var/folders/Dq/DqAU2AFEGrWDlTG3EL0dk++++TI/-Tmp-/npm-13891/1352740226549-0.6973964809440076/package/package.json
+35 verbose tar pack [ '/Users/Yoni/.npm/grunt-text-replace/0.1.3/package.tgz',
+35 verbose tar pack   '/var/folders/Dq/DqAU2AFEGrWDlTG3EL0dk++++TI/-Tmp-/npm-13891/1352740226549-0.6973964809440076/package' ]
+36 verbose tarball /Users/Yoni/.npm/grunt-text-replace/0.1.3/package.tgz
+37 verbose folder /var/folders/Dq/DqAU2AFEGrWDlTG3EL0dk++++TI/-Tmp-/npm-13891/1352740226549-0.6973964809440076/package
+38 silly lockFile 18a962cc-t-text-replace-0-1-3-package-tgz /Users/Yoni/.npm/grunt-text-replace/0.1.3/package.tgz
+39 verbose lock /Users/Yoni/.npm/grunt-text-replace/0.1.3/package.tgz /Users/Yoni/.npm/18a962cc-t-text-replace-0-1-3-package-tgz.lock
+40 silly lockFile 18a962cc-t-text-replace-0-1-3-package-tgz /Users/Yoni/.npm/grunt-text-replace/0.1.3/package.tgz
+41 silly lockFile 243d5795-grunt-text-replace-0-1-3-package /Users/Yoni/.npm/grunt-text-replace/0.1.3/package
+42 verbose lock /Users/Yoni/.npm/grunt-text-replace/0.1.3/package /Users/Yoni/.npm/243d5795-grunt-text-replace-0-1-3-package.lock
+43 silly lockFile 243d5795-grunt-text-replace-0-1-3-package /Users/Yoni/.npm/grunt-text-replace/0.1.3/package
+44 verbose tar unpack /Users/Yoni/.npm/grunt-text-replace/0.1.3/package.tgz
+45 silly lockFile 243d5795-grunt-text-replace-0-1-3-package /Users/Yoni/.npm/grunt-text-replace/0.1.3/package
+46 verbose lock /Users/Yoni/.npm/grunt-text-replace/0.1.3/package /Users/Yoni/.npm/243d5795-grunt-text-replace-0-1-3-package.lock
+47 silly gunzTarPerm modes [ '755', '644' ]
+48 silly gunzTarPerm extractEntry package.json
+49 silly gunzTarPerm extractEntry .npmignore
+50 silly gunzTarPerm extractEntry README.md
+51 silly gunzTarPerm extractEntry grunt.js
+52 silly gunzTarPerm extractEntry bin/grunt-plugin
+53 silly gunzTarPerm extractEntry LICENSE-MIT
+54 silly gunzTarPerm extractEntry tasks/grunt-text-replace.js
+55 silly gunzTarPerm extractEntry test/modified/test.txt
+56 silly gunzTarPerm extractEntry test/test.txt
+57 verbose read json /Users/Yoni/.npm/grunt-text-replace/0.1.3/package/package.json
+58 silly lockFile 243d5795-grunt-text-replace-0-1-3-package /Users/Yoni/.npm/grunt-text-replace/0.1.3/package
+59 silly shasum updated bytes 4550
+60 info shasum 9ebaed042f5d53cdc7dcdf7fe7c28722d846c01c
+60 info shasum /Users/Yoni/.npm/grunt-text-replace/0.1.3/package.tgz
+61 verbose from cache /Users/Yoni/.npm/grunt-text-replace/0.1.3/package/package.json
+62 verbose chmod /Users/Yoni/.npm/grunt-text-replace/0.1.3/package.tgz 644
+63 verbose chown /Users/Yoni/.npm/grunt-text-replace/0.1.3/package.tgz [ 501, 20 ]
+64 silly lockFile 3a52ce78- .
+65 silly publish { name: 'grunt-text-replace',
+65 silly publish   description: 'General purpose text-replacement for grunt',
+65 silly publish   version: '0.1.3',
+65 silly publish   author: { name: 'Jonathan Holmes' },
+65 silly publish   repository:
+65 silly publish    { type: 'git',
+65 silly publish      url: 'https://github.com/yoniholmes/grunt-text-replace.git' },
+65 silly publish   bugs: { url: '' },
+65 silly publish   licenses: [ { type: 'MIT', url: 'LICENSE-MIT' } ],
+65 silly publish   main: 'grunt.js',
+65 silly publish   bin: { 'grunt-text-replace': 'bin/grunt-text-replace' },
+65 silly publish   engines: { node: '*' },
+65 silly publish   scripts: { test: 'grunt test' },
+65 silly publish   devDependencies: { grunt: '~0.3.17' },
+65 silly publish   keywords: [ 'text', 'regex', 'replace', 'gruntplugin' ],
+65 silly publish   readme: '# grunt-text-replace\nGeneral purpose text-replacement for grunt.\n\nThis plugin allows you to replace text in files with *RegEx* or *String* replacement rules.\n\nSee the examples below for details.\n \n\n\n## Installation\nInstallation follows the same pattern for any grunt plugin:\n\n1. Next to your project\'s [grunt.js gruntfile][getting_started], run: \n`npm install grunt-text-replace`\n1. Then add this line to your project\'s `grunt.js` gruntfile:\n\n```javascript\ngrunt.loadNpmTasks(\'grunt-text-replace\');\n```\n\n[grunt]: http://gruntjs.com/\n[getting_started]: https://github.com/gruntjs/grunt/blob/master/docs/getting_started.md\n\n\n\n## Usage\n\nHere\'s an example of changing some text files:\n\n```javascript\ngrunt.initConfig({\n  ...\n  replace: {\n    urls: {\n      src: [\'text/*.txt\'],\n      dest: \'build/text/\',\n      replacements: [\n        { from: \'Hello\', to: \'Good bye\' }, \n        { from: /(f|F)(o{2,100})/g, to: \'M$2\' }\n      ]\n    }\n  }\n  ...\n});\n```\n\nHere\'s an example of overwriting files that have already been copied to a build \ndirectory:\n\n```javascript\ngrunt.initConfig({\n  ...\n  replace: {\n    urls: {\n      src: [\'build/*.html\'],\n      overwrite: true,\n      replacements: [\n        { \n          from: \'"localhost"\', \n          to: \'"www.mysite.com"\' \n        },\n        { \n          from: \'<p>Version:</p>\', \n          to: \'<p>Version: <%= grunt.template.today("yyyy-mm-dd") %></p>\'\n        }\n      ]\n    }\n  }\n  ...\n});\n```\n\n\n\n## API reference\n\n### replace\n\nObject. *The top level grunt task.* \n\n`replace` is is a [multi-task][multitask], meaning that it must contain targets, which you can \nname anything you like.\n\n[multitask]: https://github.com/gruntjs/grunt/blob/master/docs/api.md#gruntregistermultitask\n\n\n### *replace.task*.src\n\nArray. *The source of the files that require text replacement.*\n\n`src` must be defined within each target. `src` supports [minimatch][minimatch] paths.\n\n##### Examples\n\n```javascript\n// One of:\nsrc: [\'test.txt\']             // matches the files \'test.txt\' only\nsrc: [\'test/*.html\']          // matches all html files inside the folder \'test\'\nsrc: [\'**/*.js\']              // matches all .js files inside all subdirctories \nsrc: [\'test.txt\', \'**/*.js\']  // a combination of two of the above\n```\n\n[minimatch]: https://github.com/isaacs/minimatch\n\n\n### *replace.task*.dest\n\nString. *The destination for those files that have are matched by the `src`.*\n\n`dest` can refer to either: a single file, or a single directory. \n`grunt-text-replace` will throw an error if multiple source files are mapped to\na single file. \n\n##### Examples\n\n```javascript \n  dest: \'output.txt\'    // sends to \'output.txt\' in the grunt.js directory\n  dest: \'output/\'       // sends the replace files/s to the directory \'output\'\n```\n\n\n\n### *replace.task*.overwrite\n\nBoolean. *A switch to allow `grunt-replace-text` to rewrite original files.*\n\n`overwrite` can only be used when a `dest` is not defined, otherwise \n`grunt-text-replace` will throw an error.\n\n\n\n### *replace.task*.replacements\n\nArray. *The set of text replacements for a given task.*\n\n`replacements` is an array that can contain any number of replacements.\n\n\n### *replace.task.replacements*.from\n\nString or RegEx. *The old text that you\'d like replace.*\n\n`from` matches existing text and can be a RegEx object, or a plain string. \n\n### *replace.task.replacements*.to\n\nString. *The new text that you\'d like to change to.*\n\n`to` supports [grunt.template] replacements also.\n\nNote that if you use a RegEx \'from\' object, any matched items will be available\nto use in the \'to\' string via the RegEx matching variables \'$1, $2\', etc.\n\n\n\n## Release History\nCurrent version:  0.1.3\n\n\n\n## License\nCopyright (c) 2012 Jonathan Holmes  \nLicensed under the MIT license.',
+65 silly publish   readmeFilename: 'README.md',
+65 silly publish   _id: 'grunt-text-replace@0.1.3',
+65 silly publish   dist: { shasum: '9ebaed042f5d53cdc7dcdf7fe7c28722d846c01c' } }
+66 verbose url raw grunt-text-replace
+67 verbose url resolving [ 'https://registry.npmjs.org/', './grunt-text-replace' ]
+68 verbose url resolved https://registry.npmjs.org/grunt-text-replace
+69 info trying registry request attempt 1 at 17:10:26
+70 http PUT https://registry.npmjs.org/grunt-text-replace
+71 http 409 https://registry.npmjs.org/grunt-text-replace
+72 verbose url raw grunt-text-replace
+73 verbose url resolving [ 'https://registry.npmjs.org/', './grunt-text-replace' ]
+74 verbose url resolved https://registry.npmjs.org/grunt-text-replace
+75 info trying registry request attempt 1 at 17:10:27
+76 http GET https://registry.npmjs.org/grunt-text-replace
+77 http 200 https://registry.npmjs.org/grunt-text-replace
+78 error publish fail Cannot publish over existing version.
+78 error publish fail Bump the 'version' field, set the --force flag, or
+78 error publish fail     npm unpublish 'grunt-text-replace@0.1.3'
+78 error publish fail and try again
+79 error System Darwin 10.8.0
+80 error command "node" "/usr/local/bin/npm" "publish"
+81 error cwd /Users/Yoni/Sites/Experiments/JavaScript/grunt-text-replace
+82 error node -v v0.8.5
+83 error npm -v 1.1.65
+84 error code EPUBLISHCONFLICT
+85 verbose exit [ 1, true ]
