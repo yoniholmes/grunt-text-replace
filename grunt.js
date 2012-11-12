@@ -25,6 +25,16 @@ module.exports = function (grunt) {
         es5: true
       },
       globals: {}
+    },
+    replace: {
+      example: {
+        src: ['test/test.txt'],
+        dest: 'test/modified/',
+        replacements: [{
+          from: "Hello",
+          to: "Good bye"
+        }]
+      }
     }
   });
 
@@ -32,6 +42,6 @@ module.exports = function (grunt) {
   grunt.loadTasks('tasks');
 
   // Default task.
-  grunt.registerTask('default', 'lint test');
+  grunt.registerTask('default', 'lint test replace');
 
 };
