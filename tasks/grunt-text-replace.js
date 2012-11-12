@@ -17,15 +17,15 @@ module.exports = function (referenceToGrunt) {
   grunt = referenceToGrunt;
   plugin.registerPluginTask();
 };
-
+console.log('TETSTET');
 
 path = require('path');
 
 plugin = {
 
-// ----------------------------------------
+//------------------------------------------------------------------------------
 // Define the DATA that will be used by the plugin
-// ----------------------------------------
+//------------------------------------------------------------------------------
 
   gruntTask: {},
   
@@ -59,6 +59,8 @@ plugin = {
   },
 
   errorMessages: {
+    noTargets: "No targets were found. Remember to wrap functionality within " +
+      "a target.",
     noSourceFiles: "No source files found",
     noDestination: "Destination is not defined! If you want to overwrite " +
       "files, then make sure to set overwrite: true. If you don't wish to " +
@@ -72,18 +74,21 @@ plugin = {
       "file, make sure there is only one source file"
   },
 
-// ----------------------------------------
+//------------------------------------------------------------------------------
 // Define the BEHAVIOUR of the plugin
-// ----------------------------------------
+//------------------------------------------------------------------------------
   
   registerPluginTask: function () {
+    console.log('TEST 2', this);
     grunt.registerMultiTask('replace', 
       'General purpose text-replacement for grunt', 
-      this.textReplaceMultiTask);
+      this.runTheTextReplaceMultiTask);
   },
 
-  textReplaceMultiTask: function () {
-    plugin.saveGruntTask(this);  // 'this' points to the grunt task object
+  runTheTextReplaceMultiTask: function () {  
+  console.log('TEST');
+    var referenceToGrunkTask = this;
+    plugin.saveGruntTask(referenceToGrunkTask);
     plugin.checkForErrors();
     plugin.makeAllReplacements();
   },
@@ -93,35 +98,43 @@ plugin = {
   },
 
   checkForErrors: function () {
+  //  this.failIfNoTargetsDefined();
     this.failIfNoDestinationDefined();
     this.failIfOverwriteNotPossible();
     this.failIfNoSourceFilesFound();
     this.failIfCannotRectifyDesintation();
   },
 
+  failIfNoTargetsDefined: function () {
+    if (false = (this.pathToDestination || this.sourceFiles || 
+      this.replacements)) {
+      grunt.warn(this.errorMessages.noTargets);
+    }
+  },
+
   failIfNoDestinationDefined: function () {
     if (this.isDestinationDefined === false && 
         this.isOverwriteTrue === false) {
-      grunt.fatal(this.errorMessages.noDestination);
+      grunt.warn(this.errorMessages.noDestination);
     }
   },
 
   failIfOverwriteNotPossible: function () {
     if (this.isDestinationDefined && this.isOverwriteTrue) {
-      grunt.fatal(this.errorMessages.overwriteFailure);
+      grunt.warn(this.errorMessages.overwriteFailure);
     }
   },
 
   failIfNoSourceFilesFound: function () {
     if (this.sourceFiles.length === 0) {
-        grunt.fatal(this.errorMessages.noSourceFiles);
+        grunt.warn(this.errorMessages.noSourceFiles);
     }
   },
 
   failIfCannotRectifyDesintation: function () {
     if (this.isDirectory === false && this.sourceFiles.length > 1 && 
       this.isOverwriteTrue === false) {
-      grunt.fatal(this.errorMessages.multipleSourceSingleDestination);    
+      grunt.warn(this.errorMessages.multipleSourceSingleDestination);    
     }
   },
 
@@ -134,12 +147,7 @@ plugin = {
   makeReplacementsToFile: function (pathToFile) {
     var pathToWriteTo = this.getWriteToPathForFile(pathToFile);      
     grunt.file.copy(pathToFile, pathToWriteTo, {
-      process: function (fileContents) {
-        plugin.replacements.forEach(function (replacement) {
-          fileContents = fileContents.replace(replacement.from, replacement.to);
-        });
-        return fileContents;
-      }
+      process: this.makeReplacementsToText
     });
   },
 
@@ -152,5 +160,12 @@ plugin = {
       destination = this.pathToDestination + (this.isDirectory ? fileName : '');
     }
     return destination;
+  },
+
+  makeReplacementsToText: function (fileContents) {
+    plugin.replacements.forEach(function (replacement) {
+      fileContents = fileContents.replace(replacement.from, replacement.to);
+    });
+    return fileContents;
   }
 };
