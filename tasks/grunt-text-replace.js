@@ -52,7 +52,7 @@ plugin = {
       this.gruntTask.data.overwrite;
   },
 
-  get isDirectory () {
+  get isDestinationDirectory () {
     return (/\/$/).test(this.pathToDestination);
   },
 
@@ -128,7 +128,7 @@ plugin = {
   },
 
   failIfCannotRectifyDesintation: function () {
-    if (this.isDirectory === false && this.sourceFiles.length > 1 && 
+    if (this.isDestinationDirectory === false && this.sourceFiles.length > 1 && 
       this.isOverwriteTrue === false) {
       grunt.warn(this.errorMessages.multipleSourceSingleDestination);    
     }
@@ -153,7 +153,8 @@ plugin = {
     if (this.isOverwriteTrue) {
       destination = pathToFile;
     } else {
-      destination = this.pathToDestination + (this.isDirectory ? fileName : '');
+      destination = this.pathToDestination + 
+        (this.isDestinationDirectory ? fileName : '');
     }
     return destination;
   },
