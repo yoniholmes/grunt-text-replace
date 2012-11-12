@@ -108,8 +108,8 @@ a single file.
 ##### Examples
 
 ```javascript 
-  dest: 'output.txt'             // sends the replaced file to 'output.txt' inside the grunt.js directory
-  dest: 'output/'                // sends the replace files/s to a directory called 'output'
+  dest: 'output.txt'    // sends to 'output.txt' in the grunt.js directory
+  dest: 'output/'       // sends the replace files/s to the directory 'output'
 ```
 
 
