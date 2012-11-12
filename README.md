@@ -1,7 +1,7 @@
 # grunt-text-replace
 *General purpose text-replacement for grunt.* 
 
-This plugin allows you to replace text in files with *RegEx* or *String* replacement rules.
+This plugin allows you to replace text in files with regex or string replacement rules.
  
 
 
@@ -26,8 +26,8 @@ grunt.loadNpmTasks('grunt-text-replace');
 
 Below we're using:
 
-- a *String* to change Hello to Goodbye
-- a *RegEx* to change Foooo to Moooo
+- a string to change Hello to Goodbye
+- a regex to change Foooo to Moooo
 
 ```javascript
 grunt.initConfig({
@@ -84,7 +84,7 @@ grunt.initConfig({
 
 Object. *The top level grunt task.* 
 
-`replace` is a [multi-task][multitask], meaning that it must contain targets, which you can 
+**replace** is a [multi-task][multitask], meaning that it must contain targets, which you can 
 name anything you like.
 
 [multitask]: https://github.com/gruntjs/grunt/blob/master/docs/api.md#gruntregistermultitask
@@ -94,7 +94,7 @@ name anything you like.
 
 Array. *The source of the files that require text replacement.*
 
-`src` must be defined within each target. `src` supports [minimatch][minimatch] paths.
+**src** must be defined within each target. **src** supports [minimatch][minimatch] paths.
 
 Examples of valid **src** values:
 
@@ -110,9 +110,9 @@ src: ['test.txt', '**/*.js']  // a combination of two of the above
 
 ### dest
 
-String. *The destination for those files that have are matched by the `src`.*
+String. *The destination for those files that have are matched by the **src**.*
 
-`dest` can refer to either: 
+**dest** can refer to either: 
 
 - a single file 
 - a single directory
@@ -123,8 +123,8 @@ a single file.
 Examples of valid **desc** values:
 
 ```javascript 
-  dest: 'output.txt'    // sends to 'output.txt' in the grunt.js directory
-  dest: 'output/'       // sends the replace files/s to the directory 'output'
+dest: 'output.txt'    // sends to 'output.txt' in the grunt.js directory
+dest: 'output/'       // sends the replace files/s to the directory 'output'
 ```
 
 
@@ -133,14 +133,14 @@ Examples of valid **desc** values:
 
 Boolean. *A switch to allow `grunt-replace-text` to rewrite original files.*
 
-`overwrite` can only be used when a `dest` is not defined, otherwise 
+**overwrite** can only be used when a **dest** is not defined, otherwise 
 **grunt-text-replace** will throw an error.
 
 Examples of valid **overwrite** values:
 
 ```javascript 
-  overwrite: true
-  overwrite: false
+overwrite: true
+overwrite: false
 ```
 
 
@@ -148,26 +148,29 @@ Examples of valid **overwrite** values:
 
 Array. *The set of text replacements for a given task.*
 
-`replacements` is an array that can contain any number of replacements.
+**replacements** is an array that can contain any number of replacements.
 
 Examples of valid **replacements** values:
 
 ```javascript 
-  replacements: [{ from: "Red", to: "Blue" }]
-  replacements: [
-    { from: /colou?r/g, to: "shade" }, 
-    {
-      from: /[0-9]{1,2}\/[0-9]{1,2}\/[0-9]{2,4}/g,
-      to: "<%= grunt.template.today('dd/mm/yyyy') %>"
-    }
-  ]
+replacements: [{ from: "Red", to: "Blue" }]
+replacements: [
+  { 
+    from: /colou?r/g, 
+    to: "shade" 
+  }, 
+  {
+    from: /[0-9]{1,2}\/[0-9]{1,2}\/[0-9]{2,4}/g,
+    to: "<%= grunt.template.today('dd/mm/yyyy') %>"
+  }
+]
 ```
 
 ### from
 
 String or RegEx. *The old text that you'd like replace.*
 
-`from` can be:
+**from** can be:
 
 - a plain string
 - a regular expression object
@@ -178,7 +181,7 @@ For examples, see [replacements](#replacements) above.
 
 String. *The new text that you'd like to change to.*
 
-`to` can be either:
+**to** can be:
 
 - a plain string
 - a string containing a [grunt.template][grunt.template]
