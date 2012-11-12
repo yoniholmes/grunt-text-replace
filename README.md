@@ -55,8 +55,14 @@ grunt.initConfig({
       src: ['build/*.html'],
       overwrite: true,
       replacements: [
-        { from: '"localhost"', to: '"www.mysite.com"' },
-        { from: '<p>Version:</p>', to: '<p>Version: <%= grunt.template.today("yyyy-mm-dd") %></p>'}
+        { 
+          from: '"localhost"', 
+          to: '"www.mysite.com"' 
+        },
+        { 
+          from: '<p>Version:</p>', 
+          to: '<p>Version: <%= grunt.template.today("yyyy-mm-dd") %></p>'
+        }
       ]
     }
   }
@@ -148,7 +154,7 @@ to use in the 'to' string via the RegEx matching variables '$1, $2', etc.
 
 
 ## Release History
-Current version:  0.1.0
+Current version:  0.1.2
 
 
 
