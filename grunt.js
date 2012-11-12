@@ -46,6 +46,10 @@ module.exports = function (grunt) {
           { 
             from: '<p>Version:</p>', 
             to: '<p>Version: <%= grunt.template.today("yyyy-mm-dd") %></p>'
+          },
+          {
+            from: /[0-9]{1,2}\/[0-9]{1,2}\/[0-9]{2,4}/g,
+            to: "<%= grunt.template.today('dd/mm/yyyy') %>"
           }
         ]
       }
