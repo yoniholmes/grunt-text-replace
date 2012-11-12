@@ -154,7 +154,7 @@ to use in the 'to' string via the RegEx matching variables '$1, $2', etc.
 
 
 ## Release History
-Current version:  0.1.2
+Current version:  0.1.3
 
 
 
