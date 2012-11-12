@@ -34,6 +34,14 @@ module.exports = function (grunt) {
           from: "Hello",
           to: "Good bye"
         }]
+      },
+      overwriting: {
+        src: ['test/modified/test.txt'],
+        overwrite: true,
+        replacements: [{
+          from: "Good bye",
+          to: "Hello again"
+        }]
       }
     }
   });

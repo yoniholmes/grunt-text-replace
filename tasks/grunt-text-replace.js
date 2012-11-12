@@ -43,6 +43,14 @@ plugin = {
     return this.gruntTask.data.dest;
   },
 
+  get isSourceDefined () {
+    return typeof this.sourceFiles !== 'undefined';
+  },
+
+  get isReplacementDefined () {
+    return typeof this.replacements !== 'undefined';
+  },
+
   get isDestinationDefined () {
     return typeof this.pathToDestination !== 'undefined';
   },
@@ -63,9 +71,11 @@ plugin = {
     noDestination: "Destination is not defined! If you want to overwrite " +
       "files, then make sure to set overwrite: true. If you don't wish to " +
       "overwrite, then make sure to set a destination",
-    overwriteFailure: "You've set overwrite to true. If you want to " + 
-      "overwrite files, remove the destination. If you want to send files " +
-      "to a destination, then ensure overwrite is not set to true",
+    noReplacements: "No replacements were found.",
+    overwriteFailure: "Overwrite is to true, but a destination has also " +
+      "been defined. If you want to overwrite files, remove the destination. " +
+      "If you want to send files to a destination, then ensure overwrite is " +
+      "not set to true",
     multipleSourceSingleDestination: "Cannot write multiple files to same " +
       "file. If you wish to export to a directory, make sure there is a " + 
       "trailing slash on the destination. If you wish to write to a single " +
@@ -94,15 +104,16 @@ plugin = {
   },
 
   checkForErrors: function () {
-  //  this.failIfNoTargetsDefined();
+    this.failIfNoTargetsDefined();
     this.failIfNoDestinationDefined();
-    this.failIfOverwriteNotPossible();
     this.failIfNoSourceFilesFound();
+    this.failIfNoReplacementsDefined();
+    this.failIfOverwriteNotPossible();
     this.failIfCannotRectifyDesintation();
   },
 
   failIfNoTargetsDefined: function () {
-    if (false = (this.pathToDestination || this.sourceFiles || 
+    if (false === Boolean(this.pathToDestination || this.sourceFiles || 
       this.replacements)) {
       grunt.warn(this.errorMessages.noTargets);
     }
@@ -115,6 +126,12 @@ plugin = {
     }
   },
 
+  failIfNoReplacementsDefined: function () {
+    if (this.isReplacementDefined === false) {
+      grunt.warn(this.errorMessages.noReplacements);
+    }
+  },
+
   failIfOverwriteNotPossible: function () {
     if (this.isDestinationDefined && this.isOverwriteTrue) {
       grunt.warn(this.errorMessages.overwriteFailure);
@@ -122,7 +139,7 @@ plugin = {
   },
 
   failIfNoSourceFilesFound: function () {
-    if (this.sourceFiles.length === 0) {
+    if (this.isSourceDefined === false || this.sourceFiles.length === 0) {
         grunt.warn(this.errorMessages.noSourceFiles);
     }
   },
