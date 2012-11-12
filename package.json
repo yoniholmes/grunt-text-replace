@@ -1,11 +1,11 @@
 {
   "name": "grunt-text-replace",
   "description": "General purpose text-replacement for grunt",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "Jonathan Holmes",
   "repository": {
     "type": "git",
-    "url": "https://yoniholmes@bitbucket.org/yoniholmes/grunt-text-replace.git"
+    "url": "https://github.com/yoniholmes/grunt-text-replace.git"
   },
   "bugs": {
     "url": ""
