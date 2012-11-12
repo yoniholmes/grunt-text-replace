@@ -5,14 +5,14 @@ General purpose text-replacement for grunt.
 
 This plugin automates the process of replacing text in files.
 
-`RegEx` and `String` replacements are supported. 
+Replacement rules can be written as `RegEx` or `String` definitions. 
 
 See the examples below for details.
 
 
 ## Installation
 
-1. Next to your project's [grunt.js gruntfile][getting_started] run: 
+1. Next to your project's [grunt.js gruntfile][getting_started], run: 
 `npm install grunt-text-replace`
 1. Then add this line to your project's `grunt.js` gruntfile:
 
@@ -26,13 +26,61 @@ grunt.loadNpmTasks('grunt-text-replace');
 
 ## Usage
 
-I'll show you how it's used through comprehensive examples:
+`grunt-text-replace` works through a grunt task called `replace`.
 
-#### `src` 
+---
 
-(array) Source
+#### replace
 
-#### `dest` (string)
+**Object**. *The top level grunt task.* 
+
+`replace` goes directly inside `grunt.initConfig({});`. `replace` is is a 
+[multi-task.][multitask], meaning that it must contain targets, which you can 
+name anything you like.
+
+[multitask]: https://github.com/gruntjs/grunt/blob/master/docs/api.md#gruntregistermultitask
+
+---
+
+#### src
+
+**Array**. *The source of the files that require text replacement.*
+
+`src` must be defined within each target. `src` supports [minimatch][minimatch] paths.
+
+##### Examples
+
+```javascript
+// Valid values for 'src':
+  ['test.txt']             // matches the files 'test.txt' only
+  ['test/*.html']          // matches all html files inside the folder 'test'
+  ['**/*.js']              // matches all .js files inside all subdirctories 
+  ['test.txt', '**/*.js']  // a combination of two of the above
+```
+
+[minimatch]: https://github.com/isaacs/minimatch
+
+---
+
+#### dest
+
+**String**. *The destination for those files that have been replaced.*
+
+`dest` can refer to either: a single file, or a single directory. 
+`grunt-text-replace` will throw an error if multiple source files are mapped to
+a single file. 
+
+##### Examples
+
+```javascript 
+  'output.txt'             // sends the replaced file to 'output.txt' inside the grunt.js directory
+  'output/'                // sends the replace files/s to a directory called 'output'
+```
+
+#### overwrite
+
+**Boolean**. *A switch to allow `grunt-replace-text` to rewrite original files.*
+
 
 #### `overwrite`: `boolean`
 

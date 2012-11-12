@@ -139,14 +139,14 @@ plugin = {
   },
 
   failIfNoSourceFilesFound: function () {
-    if (this.isSourceDefined === false || this.sourceFiles.length === 0) {
+    if (this.isSourceDefined === false || this.sourceFilePaths.length === 0) {
         grunt.warn(this.errorMessages.noSourceFiles);
     }
   },
 
   failIfCannotRectifyDesintation: function () {
-    if (this.isDestinationDirectory === false && this.sourceFiles.length > 1 && 
-      this.isOverwriteTrue === false) {
+    if (this.isDestinationDirectory === false && 
+      this.sourceFilePaths.length > 1 && this.isOverwriteTrue === false) {
       grunt.warn(this.errorMessages.multipleSourceSingleDestination);    
     }
   },
