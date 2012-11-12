@@ -24,16 +24,16 @@ module.exports = function (grunt) {
         node: true,
         es5: true
       },
-      globals: {},
-      replace: {
-        example: {
-          src: ['test.txt'],
-          dest: 'test/modified/',
-          replacements: [{
-            from: "Hello",
-            to: "Good bye"
-          }]
-        }
+      globals: {}
+    },
+    replace: {
+      example: {
+        src: ['test/test.txt'],
+        dest: 'test/modified/',
+        replacements: [{
+          from: "Hello",
+          to: "Good bye"
+        }]
       }
     }
   });

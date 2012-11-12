@@ -12,12 +12,10 @@
 
 var path, plugin, grunt;
 
-
 module.exports = function (referenceToGrunt) {
   grunt = referenceToGrunt;
   plugin.registerPluginTask();
 };
-console.log('TETSTET');
 
 path = require('path');
 
@@ -79,14 +77,12 @@ plugin = {
 //------------------------------------------------------------------------------
   
   registerPluginTask: function () {
-    console.log('TEST 2', this);
     grunt.registerMultiTask('replace', 
       'General purpose text-replacement for grunt', 
       this.runTheTextReplaceMultiTask);
   },
 
   runTheTextReplaceMultiTask: function () {  
-  console.log('TEST');
     var referenceToGrunkTask = this;
     plugin.saveGruntTask(referenceToGrunkTask);
     plugin.checkForErrors();
