@@ -184,8 +184,7 @@ plugin = {
       if (typeof replaceToText === 'string') {
         replaceToText = grunt.template.process(replaceToText);
       }
-      replacedContents = replacedContents.replace(
-        replaceFromText, replaceToText);
+      replacedContents = replacedContents.replace(replaceFromText, replaceToText);
     });
     return replacedContents;
   },

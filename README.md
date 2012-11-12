@@ -1,9 +1,10 @@
 # grunt-text-replace
 General purpose text-replacement for grunt.
 
-This plugin allows you to replace text in files with `RegEx` or `String` replacement rules.
+This plugin allows you to replace text in files with *RegEx* or *String* replacement rules.
 
 See the examples below for details.
+ 
 
 
 ## Installation
@@ -21,6 +22,7 @@ grunt.loadNpmTasks('grunt-text-replace');
 [getting_started]: https://github.com/gruntjs/grunt/blob/master/docs/getting_started.md
 
 
+
 ## Usage
 
 Here's an example of changing some text files:
@@ -33,8 +35,8 @@ grunt.initConfig({
       src: ['text/*.txt'],
       dest: 'build/text/',
       replacements: [
-        { from: 'ferret', to: 'spatula' }, 
-        { from: /colou?r/g, to: 'color' }
+        { from: 'Hello', to: 'Good bye' }, 
+        { from: /(f|F)(o{2,100})/g, to: 'M$2' }
       ]
     }
   }
@@ -42,7 +44,8 @@ grunt.initConfig({
 });
 ```
 
-Here's an example of overwriting files that have already been copied to a build directory:
+Here's an example of overwriting files that have already been copied to a build 
+directory:
 
 ```javascript
 grunt.initConfig({
@@ -51,19 +54,19 @@ grunt.initConfig({
     urls: {
       src: ['build/*.html'],
       overwrite: true,
-      replacements: [{
-        from: '"localhost"',
-        to: '"www.mysite.com"'
-      }]
+      replacements: [
+        { from: '"localhost"', to: '"www.mysite.com"' },
+        { from: '<p>Version:</p>', to: '<p>Version: <%= grunt.template.today("yyyy-mm-dd") %></p>'}
+      ]
     }
   }
   ...
 });
 ```
 
+
+
 ## API reference
-
-
 
 ### replace
 
@@ -73,7 +76,6 @@ Object. *The top level grunt task.*
 name anything you like.
 
 [multitask]: https://github.com/gruntjs/grunt/blob/master/docs/api.md#gruntregistermultitask
-
 
 
 ### *replace.task*.src
@@ -93,7 +95,6 @@ src: ['test.txt', '**/*.js']  // a combination of two of the above
 ```
 
 [minimatch]: https://github.com/isaacs/minimatch
-
 
 
 ### *replace.task*.dest
@@ -133,10 +134,13 @@ Array. *The set of text replacements for a given task.*
 
 String or RegEx. *The old text that you'd like replace.*
 
+`from` matches existing text and can be a RegEx object, or a plain string. 
 
 ### *replace.task.replacements*.to
 
 String. *The new text that you'd like to change to.*
+
+`to` supports [grunt.template] replacements also.
 
 Note that if you use a RegEx 'from' object, any matched items will be available
 to use in the 'to' string via the RegEx matching variables '$1, $2', etc.
@@ -145,6 +149,7 @@ to use in the 'to' string via the RegEx matching variables '$1, $2', etc.
 
 ## Release History
 Current version:  0.1.0
+
 
 
 ## License

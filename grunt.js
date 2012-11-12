@@ -30,18 +30,24 @@ module.exports = function (grunt) {
       example: {
         src: ['test/test.txt'],
         dest: 'test/modified/',
-        replacements: [{
-          from: "Hello",
-          to: "Good bye on <%= grunt.template.today('yyyy-mm-dd') %>"
-        }]
+        replacements: [
+          { from: 'Hello', to: 'Good bye' }, 
+          { from: /(f|F)(o{2,100})/g, to: 'M$2' }
+        ]
       },
       overwriting: {
         src: ['test/modified/test.txt'],
         overwrite: true,
-        replacements: [{
-          from: "Good bye",
-          to: "Hello again"
-        }]
+        replacements: [
+          { 
+            from: '"localhost"', 
+            to: '"www.mysite.com"' 
+          },
+          { 
+            from: '<p>Version:</p>', 
+            to: '<p>Version: <%= grunt.template.today("yyyy-mm-dd") %></p>'
+          }
+        ]
       }
     }
   });
