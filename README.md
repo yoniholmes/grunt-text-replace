@@ -84,7 +84,7 @@ grunt.initConfig({
 
 Object. *The top level grunt task.* 
 
-`replace` is is a [multi-task][multitask], meaning that it must contain targets, which you can 
+`replace` is a [multi-task][multitask], meaning that it must contain targets, which you can 
 name anything you like.
 
 [multitask]: https://github.com/gruntjs/grunt/blob/master/docs/api.md#gruntregistermultitask
