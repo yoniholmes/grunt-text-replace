@@ -151,7 +151,9 @@ replacements: [{ from: "Red", to: "Blue" }]
 replacements: [
   { 
     from: /colou?r/g, 
-    to: "shade" 
+    to: function () {
+      return "shade";
+    }
   }, 
   {
     from: /[0-9]{1,2}\/[0-9]{1,2}\/[0-9]{2,4}/g,
@@ -180,6 +182,34 @@ String. *The new text that you'd like to change to.*
 - a plain string
 - a string containing a [grunt.template][grunt.template]
 - a string containing regex variables `$1`, `$2`, etc
+- a function where the return value will be used as the replacement text.
+
+Where **to** is a function, the function receives 4 parameters:
+
+1. **matchedWord**:  the matched word
+2. **index**:  an integer representing point where word was found in a text
+3. **fullText**:  the full original text
+4. **regexMatches**:  an array containing all regex matches
+
+Here's an example:
+
+```javascript
+// Where the original source string is:  "Hello world"
+
+replacements: [{ 
+  from: /wor(ld)/g, 
+  to: function (matchedWord, index, fullText, regexMatches) {
+    // matchedWord:  "world"
+    // index:  6  
+    // fullText:  "Hello world"
+    // regexMatches:  ["ld"]
+    return 'planet';
+  }
+}],
+
+// The full text will now be:  "Hello planet"
+```
+
 
 
 For examples, see [replacements](#replacements) above.
@@ -188,7 +218,8 @@ For examples, see [replacements](#replacements) above.
 
 
 ## Release History
-Current version:  0.1.7
+Current version:  0.1.8:  Added support for supplying a function to replace text.
+
 
 
 

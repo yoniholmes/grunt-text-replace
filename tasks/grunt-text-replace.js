@@ -183,11 +183,19 @@ plugin = {
           replaceToText = replacement.to;
       if (typeof replaceToText === 'string') {
         replaceToText = grunt.template.process(replaceToText);
+      } else if (typeof replaceToText === 'function') {
+        replaceToText = function () {
+          var matchedSubstring = arguments[0],
+            index = arguments[arguments.length - 2],
+            fullText = arguments[arguments.length - 1],
+            regexMatches = Array.prototype.slice.call(arguments, 1, arguments.length - 2);
+          return replacement.to(matchedSubstring, index, fullText, regexMatches);
+        };
       }
       replacedContents = replacedContents.replace(replaceFromText, replaceToText);
     });
     return replacedContents;
-  },
+  }
 
 
 };

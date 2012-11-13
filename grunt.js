@@ -40,8 +40,10 @@ module.exports = function (grunt) {
         overwrite: true,
         replacements: [
           { 
-            from: '"localhost"', 
-            to: '"www.mysite.com"' 
+            from: /"localhost"/, 
+            to: function (matchedWord, index, fullText, regexMatches) {
+              return '"www.mysite.com"';
+            } 
           },
           { 
             from: '<p>Version:</p>', 
