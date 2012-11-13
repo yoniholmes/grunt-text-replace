@@ -189,7 +189,7 @@ Where **to** is a function, the function receives 4 parameters:
 1. **matchedWord**:  the matched word
 2. **index**:  an integer representing point where word was found in a text
 3. **fullText**:  the full original text
-4. **regexMatches**:  an array containing all regex matches
+4. **regexMatches**:  an array containing all regex matches, empty if none defined or found.
 
 Here's an example:
 
