@@ -4,31 +4,61 @@ var grunt = require('grunt'),
   plugin;
 
 
-module.exports = function (referenceToGrunt) {
-  grunt = referenceToGrunt;
-  plugin.registerTextReplaceHelper();
-  plugin.registerTextReplaceMultipleHelper();
-  plugin.registerTextReplaceTask();
+module.exports = function () {
+  plugin.initialisePlugin();
 };
 
 
 plugin = {
-  registerTextReplaceHelper: function () {
-    grunt.registerHelper('text-replace', function (fullText, pattern, replacement) {
-      return fullText.replace(plugin.convertToRegex(pattern), plugin.treatReplacement(replacement));
-    });
+  initialisePlugin: function () {
+    this.registerTasks();
+    this.registerHelpers();
   },
 
-  registerTextReplaceMultipleHelper: function () {
-    grunt.registerHelper('text-replace-multiple', function (fullText, allReplacements) {
-      return allReplacements.reduce(function (fullText, replacements) {
-        return grunt.helper('text-replace', fullText, replacements.from, replacements.to);
-      }, fullText);
-    });
+  registerTasks: function () {
+    this.registerTextReplaceTask();
+  },
+
+  registerHelpers: function () {
+    this.registerTextReplaceHelper();
+    this.registerTextReplaceMultipleHelper();
+    this.registerTextReplaceFileHelper();
   },
 
   registerTextReplaceTask: function () {
     //grunt.registerPluginTask();
+  },
+
+  registerTextReplaceHelper: function () {
+    grunt.registerHelper('text-replace', this.textReplace);
+  },
+
+  registerTextReplaceMultipleHelper: function () {
+    grunt.registerHelper('text-replace-multiple', this.textReplaceMultiple);
+  },
+
+  registerTextReplaceFileHelper: function () {
+    grunt.registerHelper('text-replace-file', this.textReplaceFile);
+  },
+
+  textReplace: function (fullText, pattern, replacement) {
+    var regex = plugin.convertToRegex(pattern),
+      treatedReplacement = plugin.treatReplacement(replacement);
+    return fullText.replace(regex, treatedReplacement);
+  },
+
+  textReplaceMultiple: function (fullText, allReplacements) {
+    return allReplacements.reduce(function (fullText, replacements) {
+      return grunt.helper('text-replace', fullText, replacements.from, replacements.to);
+    }, fullText);
+  },
+
+  textReplaceFile: function (src, dest, replacements) {
+    grunt.file.copy(src, dest, {
+      process: function (fullText) {
+        return grunt.helper('text-replace-multiple', fullText, replacements);
+      }
+    });
   },
 
   convertToRegex: function (pattern) {

@@ -61,10 +61,10 @@ module.exports = function (grunt) {
   // Load local tasks.
   grunt.loadTasks('tasks');
 
-  // Default task.
-  grunt.registerTask('default', 'lint replace');
-  
   grunt.renameTask('test', 'nodeunit');
+  
   grunt.registerTask('test', 'lint nodeunit');
+  grunt.registerTask('default', 'test');
 
+  grunt.registerTask('example', 'replace');
 };
