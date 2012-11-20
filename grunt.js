@@ -66,5 +66,5 @@ module.exports = function (grunt) {
   grunt.registerTask('test', 'lint nodeunit');
   grunt.registerTask('default', 'test');
 
-  grunt.registerTask('example', 'replace');
+  grunt.registerTask('example', 'replace:example');
 };
