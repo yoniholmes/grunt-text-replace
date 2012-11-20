@@ -3,8 +3,8 @@ module.exports = function (grunt) {
 
   // Project configuration.
   grunt.initConfig({
-    test: {
-      files: ['test/**/*.js']
+    nodeunit: {
+      files: ['test/*.js']
     },
     lint: {
       files: ['grunt.js', 'tasks/**/*.js', 'test/**/*.js']
@@ -62,6 +62,9 @@ module.exports = function (grunt) {
   grunt.loadTasks('tasks');
 
   // Default task.
-  grunt.registerTask('default', 'lint test replace');
+  grunt.registerTask('default', 'lint replace');
+  
+  grunt.renameTask('test', 'nodeunit');
+  grunt.registerTask('test', 'lint nodeunit');
 
 };
