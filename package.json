@@ -1,14 +1,14 @@
 {
   "name": "grunt-text-replace",
   "description": "General purpose text-replacement for grunt",
-  "version": "0.1.8",
+  "version": "0.2.0",
   "author": "Jonathan Holmes",
   "repository": {
     "type": "git",
     "url": "https://github.com/yoniholmes/grunt-text-replace.git"
   },
   "bugs": {
-    "url": ""
+    "url": "https://github.com/yoniholmes/grunt-text-replace/issues"
   },
   "licenses": [
     {
@@ -28,9 +28,11 @@
     "grunt": "~0.3.17"
   },
   "keywords": [
-    "text",
-    "regex",
+    "gruntplugin",
     "replace",
-    "gruntplugin"
+    "text",
+    "string",
+    "regex",
+    "function"
   ]
 }

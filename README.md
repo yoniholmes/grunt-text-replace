@@ -1,17 +1,18 @@
 # grunt-text-replace
 *General purpose text-replacement for grunt.* 
 
-This plugin allows you to replace text in files with regex or string replacement rules.
+This plugin allows you to replace text in files using strings, regexs or functions.
  
 
 
 ## Installation
-Installation follows the same pattern for any grunt plugin:
+In your project's [grunt.js][getting_started] directory, run: 
 
-- In your project's [grunt.js][getting_started] directory, run: 
-`npm install grunt-text-replace`
-- Alternatively list it as a [dependancy][dependancy] in your *package.json* and run: `npm install`
-- Then add this line to your project's *grunt.js*:
+```bash
+npm install grunt-text-replace
+```
+
+Then add this line to your project's *grunt.js*:
 
 ```javascript
 grunt.loadNpmTasks('grunt-text-replace');
@@ -19,72 +20,57 @@ grunt.loadNpmTasks('grunt-text-replace');
 
 [grunt]: http://gruntjs.com/
 [getting_started]: https://github.com/gruntjs/grunt/blob/master/docs/getting_started.md
-[dependancy]: https://npmjs.org/doc/json.html#dependencies
 
 
 ## Usage
 
-Below we're using:
-
-- a string to change Hello to Goodbye
-- a regex to change Foooo to Moooo
 
 ```javascript
-grunt.initConfig({
-  ...
-  replace: {
-    example: {
-      src: ['text/*.txt'],
-      dest: 'build/text/',
-      replacements: [
-        { 
-          from: 'Hello', 
-          to: 'Good bye' 
-        }, 
-        { 
-          from: /(f|F)(o{2,100})/g, 
-          to: 'M$2' 
-        }
-      ]
-    }
+replace: {
+  example: {
+    src: ['text/*.txt'],             // source files array (supports minimatch)
+    dest: 'build/text/',             // destination directory or file
+    replacements: [{ 
+      from: 'Red',                   // string replacement
+      to: 'Blue' 
+    }, { 
+      from: /(f|F)(o{2,100})/g,      // regex replacement ('Fooo' to 'Mooo')
+      to: 'M$2' 
+    }, {
+      from: 'Foo',
+      to: function (matchedWord) {   // callback replacement
+        return matchedWord + ' Bar';
+      }
+    }]
   }
-  ...
-});
+}
 ```
 
-In the next example we're:
-
-- using [grunt.template][grunt.template] in the output
-- overwriting source files
+Here's another example using [grunt.template][grunt.template], and overwriting 
+of source files:
 
 ```javascript
-grunt.initConfig({
-  ...
-  replace: {
-    another_example: {
-      src: ['build/*.html'],
-      overwrite: true,
-      replacements: [
-        { 
-          from: '<p>Version:</p>', 
-          to: '<p>Version: <%= grunt.template.today("yyyy-mm-dd") %></p>'
-        }
-      ]
-    }
+replace: {
+  another_example: {
+    src: ['build/*.html'],
+    overwrite: true,                     // overwriting each file
+    replacements: [{ 
+      from: /[0-9]{1,2}\/[0-9]{1,2}\/[0-9]{2,4}/g,
+      to: "<%= grunt.template.today('dd/mm/yyyy') %>"
+    }]
   }
-  ...
-});
+}
 ```
 
 
 
 ## API reference
 
-### replace
 
-Object. *The top level grunt task.* 
+### replace 
 
-**replace** is a [multi-task][multitask], meaning that it must contain targets, which you can 
+*replace* is the top level task that goes in your `grunt.initConfig({})`. It is
+a [multi-task][multitask], meaning that it must contain targets, which you can 
 name anything you like.
 
 [multitask]: https://github.com/gruntjs/grunt/blob/master/docs/api.md#gruntregistermultitask
@@ -92,11 +78,10 @@ name anything you like.
 
 ### src
 
-Array. *The source of the files that require text replacement.*
+*src* is an array of source files to be replaced, and is required. 
+It supports [minimatch][minimatch] paths.
 
-**src** must be defined within each target. **src** supports [minimatch][minimatch] paths.
-
-Examples of valid **src** values:
+<!-- Examples of valid *src* values:
 
 ```javascript
 src: ['test.txt']             // matches the files 'test.txt' only
@@ -104,94 +89,61 @@ src: ['test/*.html']          // matches all html files inside the folder 'test'
 src: ['**/*.js']              // matches all .js files inside all subdirctories 
 src: ['test.txt', '**/*.js']  // a combination of two of the above
 ```
-
+ -->
 [minimatch]: https://github.com/isaacs/minimatch
 
 
 ### dest
 
-String. *The destination for those files that have are matched by the **src**.*
+*dest* is the destination for files to be replaced, and can refer to either a:
 
-**dest** can refer to either: 
+- file: `'path/output.txt'`
+- directory: `'path/'`
 
-- a single file 
-- a single directory
-
-**grunt-text-replace** will throw an error if multiple source files are mapped to
+grunt-text-replace will throw an error if multiple source files are mapped to
 a single file. 
-
-Examples of valid **desc** values:
-
-```javascript 
-dest: 'output.txt'    // sends to 'output.txt' in the grunt.js directory
-dest: 'output/'       // sends the replace files/s to the directory 'output'
-```
 
 
 
 ### overwrite
 
-Boolean. *A switch to allow `grunt-replace-text` to rewrite original files.*
-
-**overwrite** can only be used when a **dest** is not defined, otherwise 
-**grunt-text-replace** will throw an error.
-
+*overwrite* is used if all you need to do is overwrite existing files. 
+To use it, omit *dest*, otherwise 
+grunt-text-replace will throw an error. You can only use one or the other. 
 
 
 ### replacements
 
-Array. *The set of text replacements for a given task.*
+*replacements* is an array of *from* and *to* replacements. See the 
+[examples](#usage) above.
 
-**replacements** is an array that can contain any number of replacements.
-
-Examples of valid **replacements** values:
-
-```javascript 
-replacements: [{ from: "Red", to: "Blue" }]
-replacements: [
-  { 
-    from: /colou?r/g, 
-    to: function () {
-      return "shade";
-    }
-  }, 
-  {
-    from: /[0-9]{1,2}\/[0-9]{1,2}\/[0-9]{2,4}/g,
-    to: "<%= grunt.template.today('dd/mm/yyyy') %>"
-  }
-]
-```
 
 ### from
 
-String or RegEx. *The old text that you'd like replace.*
+*from* is the old text that you'd like replace. It can be a:
 
-**from** can be:
+- plain string: `'Red'` *matches all instances of 'Red' in file*
+- regular expression object:  `/(r|R)ed/g` *same as above*
 
-- a plain string
-- a regular expression object
-
-For examples, see [replacements](#replacements) above.
 
 ### to
 
-String. *The new text that you'd like to change to.*
+*to* is the replacement. It can be a:
 
-**to** can be:
+- plain string
+- string containing a [grunt.template][grunt.template]
+- string containing regex variables `$1`, `$2`, etc
+- combination of the above
+- function where the return value will be used as the replacement text.
 
-- a plain string
-- a string containing a [grunt.template][grunt.template]
-- a string containing regex variables `$1`, `$2`, etc
-- a function where the return value will be used as the replacement text.
-
-Where **to** is a function, the function receives 4 parameters:
+#### function
+Where *to* is a function, the function receives 4 parameters:
 
 1. **matchedWord**:  the matched word
 2. **index**:  an integer representing point where word was found in a text
 3. **fullText**:  the full original text
 4. **regexMatches**:  an array containing all regex matches, empty if none defined or found.
 
-Here's an example:
 
 ```javascript
 // Where the original source string is:  "Hello world"
@@ -203,22 +155,20 @@ replacements: [{
     // index:  6  
     // fullText:  "Hello world"
     // regexMatches:  ["ld"]
-    return 'planet';
+    return 'planet';   //
   }
-}],
+}]
 
 // The full text will now be:  "Hello planet"
 ```
 
 
-
-For examples, see [replacements](#replacements) above.
-
 [grunt.template]: https://github.com/gruntjs/grunt/blob/master/docs/api_template.md
 
 
 ## Release History
-Current version:  0.1.8:  Added support for supplying a function to replace text.
+- v0.2.0 - 2012/11/21.  Added tests, refactored internals, strings now replace globally within a file, updated documentation.
+- v0.1.0 - 2012/11/12.  Initial release.
 
 
 

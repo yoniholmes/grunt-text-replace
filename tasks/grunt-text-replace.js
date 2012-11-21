@@ -5,8 +5,7 @@ var path = require('path');
 var plugin;
 
 
-module.exports = function (_grunt) {
-  // grunt = _grunt
+module.exports = function () {
   plugin.initialisePlugin();
 };
 
@@ -72,16 +71,18 @@ plugin = {
   },
 
   replaceTask: function () {
-    var src = this.data.src;
-    var dest = this.data.dest;
-    var replacements = this.data.replacements;
-    grunt.helper('text-replace-file', src, dest, replacements);
+    grunt.helper('replace', {
+      src: this.data.src,
+      dest: this.data.dest,
+      overwrite: this.data.overwrite,
+      replacements: this.data.replacements
+    });
   },
 
   textReplaceHelper: function (fullText, pattern, replacement) {
-    var regex = plugin.convertToRegex(pattern);
-    var treatedReplacement = plugin.treatReplacement(replacement);
-    return fullText.replace(regex, treatedReplacement);
+    var regex = plugin.convertMatchToRegex(pattern);
+    var expandedReplacement = plugin.expandReplacement(replacement);
+    return fullText.replace(regex, expandedReplacement);
   },
 
   textReplaceMultipleHelper: function (fullText, allReplacements) {
@@ -93,7 +94,12 @@ plugin = {
   textReplaceFileHelper: function (pathToSource, dest, replacements) {
     var isDestinationDirectory = (/\/$/).test(dest);
     var fileName = path.basename(pathToSource);
-    var pathToDestination = dest + (isDestinationDirectory ? fileName : '');
+    var pathToDestination;
+    if (typeof dest === 'undefined') {
+      pathToDestination = pathToSource;
+    } else {
+      pathToDestination = dest + (isDestinationDirectory ? fileName : '');
+    }
     grunt.file.copy(pathToSource, pathToDestination, {
       process: function (fullText) {
         return grunt.helper('text-replace-multiple', fullText, replacements);
@@ -110,22 +116,55 @@ plugin = {
 
   replaceHelper: function (settings) {
     var src = settings.src;
+    var srcLength = typeof src === 'undefined' ? 0 : grunt.file.expandFiles(src).length;
     var dest = settings.dest;
     var overwrite = settings.overwrite;
     var replacements = settings.replacements;
+    var isDestinationDirectory = (/\/$/).test(dest);
+    var initialWarnCount = grunt.fail.warncount;
 
-    if (typeof src === 'undefined' || src.length === 0) {
-      grunt.log.error(plugin.errorMessages.noSourceFiles);
+    // No target defined
+    if (typeof dest === 'undefined' &&
+        typeof src === 'undefined' &&
+        typeof replacements === 'undefined') {
+      grunt.warn(plugin.errorMessages.noTargets);
+    }
+
+    // No source
+    if (srcLength === 0) {
+      grunt.warn(plugin.errorMessages.noSourceFiles);
+    }
+
+    // No destination
+    if (typeof dest === 'undefined' && overwrite !== true) {
+      grunt.warn(plugin.errorMessages.noDestination);
+    }
+
+    // No replacements
+    if (typeof replacements === 'undefined') {
+      grunt.warn(plugin.errorMessages.noReplacements);
+    }
+
+    // Overwrite not possible
+    if (typeof dest !== 'undefined' && overwrite === true) {
+      grunt.warn(plugin.errorMessages.overwriteFailure);
+    }
+
+    // Desitination error
+    if (isDestinationDirectory === false && srcLength > 1) {
+      grunt.warn(plugin.errorMessages.multipleSourceSingleDestination);
+    }
+
+    if (grunt.fail.warncount - initialWarnCount === 0) {
+      grunt.helper('text-replace-file-multiple', src, dest, replacements);
     }
   },
-  
-  // TO DO: rename this to something more useful
-  convertToRegex: function (pattern) {
+
+  convertMatchToRegex: function (pattern) {
     return typeof pattern === 'string' ? new RegExp(pattern, "g") : pattern;
   },
 
-  // TO DO: rename this to something more useful, maybe split into smaller functions
-  treatReplacement: function (replacement) {
+  expandReplacement: function (replacement) {
     var alteredReplacement;
     switch (typeof replacement) {
       case 'function':
