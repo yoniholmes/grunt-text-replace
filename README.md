@@ -1,9 +1,8 @@
-# grunt-text-replace
+# grunt-text-replace !['Build status'](https://api.travis-ci.org/yoniholmes/grunt-text-replace.png)
 *General purpose text-replacement for grunt.* 
 
 This plugin allows you to replace text in files using strings, regexs or functions.
  
-
 
 ## Installation
 In your project's [grunt.js][getting_started] directory, run: 
