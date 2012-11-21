@@ -80,15 +80,6 @@ name anything you like.
 *src* is an array of source files to be replaced, and is required. 
 It supports [minimatch][minimatch] paths.
 
-<!-- Examples of valid *src* values:
-
-```javascript
-src: ['test.txt']             // matches the files 'test.txt' only
-src: ['test/*.html']          // matches all html files inside the folder 'test'
-src: ['**/*.js']              // matches all .js files inside all subdirctories 
-src: ['test.txt', '**/*.js']  // a combination of two of the above
-```
- -->
 [minimatch]: https://github.com/isaacs/minimatch
 
 
