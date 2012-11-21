@@ -115,7 +115,7 @@ plugin = {
     var replacements = settings.replacements;
 
     if (typeof src === 'undefined' || src.length === 0) {
-      grunt.warn(plugin.errorMessages.noSourceFiles);
+      grunt.log.error(plugin.errorMessages.noSourceFiles);
     }
   },
   

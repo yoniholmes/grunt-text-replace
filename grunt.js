@@ -4,7 +4,8 @@ module.exports = function (grunt) {
   // Project configuration.
   grunt.initConfig({
     nodeunit: {
-      files: ['test/*.js']
+      main: ['test/test-text-replace.js'],
+      errors: ['test/test-text-replace-errors.js']
     },
     lint: {
       files: ['grunt.js', 'tasks/**/*.js', 'test/**/*.js']
@@ -63,7 +64,8 @@ module.exports = function (grunt) {
 
   grunt.renameTask('test', 'nodeunit');
   
-  grunt.registerTask('test', 'lint nodeunit');
+  grunt.registerTask('test', 'lint nodeunit:main');
+  grunt.registerTask('test-errors', 'lint nodeunit:errors');
   grunt.registerTask('default', 'test');
 
   grunt.registerTask('example', 'replace:example');
