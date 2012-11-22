@@ -113,7 +113,7 @@ grunt-text-replace will throw an error. You can only use one or the other.
 *from* is the old text that you'd like replace. It can be a:
 
 - plain string: `'Red'` *matches all instances of 'Red' in file*
-- regular expression object:  `Red/g` *same as above*
+- regular expression object:  `/Red/g` *same as above*
 
 
 ### to
