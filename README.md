@@ -46,13 +46,13 @@ replace: {
 ```
 
 Here's another example using [grunt.template][grunt.template], and overwriting 
-of source files:
+original source files:
 
 ```javascript
 replace: {
   another_example: {
     src: ['build/*.html'],
-    overwrite: true,                     // overwriting each file
+    overwrite: true,                 // overwrite matched source files
     replacements: [{ 
       from: /[0-9]{1,2}\/[0-9]{1,2}\/[0-9]{2,4}/g,
       to: "<%= grunt.template.today('dd/mm/yyyy') %>"
@@ -113,7 +113,7 @@ grunt-text-replace will throw an error. You can only use one or the other.
 *from* is the old text that you'd like replace. It can be a:
 
 - plain string: `'Red'` *matches all instances of 'Red' in file*
-- regular expression object:  `/(r|R)ed/g` *same as above*
+- regular expression object:  `Red/g` *same as above*
 
 
 ### to
@@ -136,7 +136,7 @@ Where *to* is a function, the function receives 4 parameters:
 
 
 ```javascript
-// Where the original source string is:  "Hello world"
+// Where the original source file text is:  "Hello world"
 
 replacements: [{ 
   from: /wor(ld)/g, 
@@ -149,7 +149,7 @@ replacements: [{
   }
 }]
 
-// The full text will now be:  "Hello planet"
+// The new text will now be:  "Hello planet"
 ```
 
 
