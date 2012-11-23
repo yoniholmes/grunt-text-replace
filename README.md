@@ -1,4 +1,10 @@
-# grunt-text-replace !['Build status'](https://api.travis-ci.org/yoniholmes/grunt-text-replace.png)
+# grunt-text-replace [!['Build status'][travis_image_url]][travis_page_url]
+
+  [travis_image_url]: https://api.travis-ci.org/yoniholmes/grunt-text-replace.png
+  [travis_page_url]: https://travis-ci.org/yoniholmes/grunt-text-replace
+
+
+
 General purpose text replacement for grunt. 
 
 Allows you to replace text in files using strings, regexs or functions.
@@ -17,8 +23,8 @@ Then add this line to your project's *grunt.js*:
 grunt.loadNpmTasks('grunt-text-replace');
 ```
 
-[grunt]: http://gruntjs.com/
-[getting_started]: https://github.com/gruntjs/grunt/blob/master/docs/getting_started.md
+  [grunt]: http://gruntjs.com/
+  [getting_started]: https://github.com/gruntjs/grunt/blob/master/docs/getting_started.md
 
 
 ## Usage
