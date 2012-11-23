@@ -162,6 +162,9 @@ replacements: [{
 - v0.2.0 - 2012/11/21.  Added tests, refactored internals, strings now replace globally within a file, updated documentation.
 - v0.1.0 - 2012/11/12.  Initial release.
 
+Patch releases will generally remain undocumented in this release history. 
+I'll do so if there's enough reason for it, such as a functionality tweak, or 
+significant bug fix. For more detail see the source.
 
 
 
