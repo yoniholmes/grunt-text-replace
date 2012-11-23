@@ -11,13 +11,13 @@ Allows you to replace text in files using strings, regexs or functions.
  
 
 ## Installation
-In your project's [grunt.js][getting_started] directory, run: 
+In your project's [gruntfile][getting_started] directory, run: 
 
 ```bash
 npm install grunt-text-replace
 ```
 
-Then add this line to your project's *grunt.js*:
+Then add this line to your project's [gruntfile][getting_started]:
 
 ```javascript
 grunt.loadNpmTasks('grunt-text-replace');
