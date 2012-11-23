@@ -1,7 +1,7 @@
 {
   "name": "grunt-text-replace",
   "description": "General purpose text replacement for grunt. Allows you to replace text in files using strings, regexs or functions.",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "author": "Jonathan Holmes",
   "repository": {
     "type": "git",
