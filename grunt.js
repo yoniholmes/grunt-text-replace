@@ -6,6 +6,10 @@ module.exports = function (grunt) {
       main: ['test/test-text-replace.js'],
       errors: ['test/test-text-replace-errors.js']
     },
+    watch: {
+      files: '<config:lint.files>',
+      tasks: 'default'
+    },
     lint: {
       files: ['grunt.js', 'tasks/**/*.js', 'test/**/*.js']
     },
@@ -30,30 +34,24 @@ module.exports = function (grunt) {
       example: {
         src: ['test/text_files/example.txt'],
         dest: 'test/modified/',
-        replacements: [
-          { 
-            from: 'Hello', 
-            to: 'Good bye' 
-          }, 
-          { 
-            from: /(f|F)(o{2,100})/g, 
-            to: 'M$2' 
-          },
-          { 
-            from: /"localhost"/, 
-            to: function (matchedWord, index, fullText, regexMatches) {
-              return '"www.mysite.com"';
-            } 
-          },
-          { 
-            from: '<p>Version:</p>', 
-            to: '<p>Version: <%= grunt.template.today("yyyy-mm-dd") %></p>'
-          },
-          {
-            from: /[0-9]{1,2}\/[0-9]{1,2}\/[0-9]{2,4}/g,
-            to: "<%= grunt.template.today('dd/mm/yyyy') %>"
-          }
-        ]
+        replacements: [{ 
+          from: 'Hello', 
+          to: 'Good bye' 
+        }, { 
+          from: /(f|F)(o{2,100})/g, 
+          to: 'M$2' 
+        }, { 
+          from: /"localhost"/, 
+          to: function (matchedWord, index, fullText, regexMatches) {
+            return '"www.mysite.com"';
+          } 
+        }, { 
+          from: '<p>Version:</p>', 
+          to: '<p>Version: <%= grunt.template.today("yyyy-mm-dd") %></p>'
+        }, {
+          from: /[0-9]{1,2}\/[0-9]{1,2}\/[0-9]{2,4}/g,
+          to: "<%= grunt.template.today('dd/mm/yyyy') %>"
+        }]
       }
     }
   });

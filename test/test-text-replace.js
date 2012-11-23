@@ -43,6 +43,10 @@ exports['test-text-replace'] = {
         function (matchedWord, index, fullText, regexMatches) {
           return 'Place: ' + regexMatches[1] + ', Greeting: ' + regexMatches[0];
         }), 'Place: world, Greeting: Hello');
+      test.equal(grunt.helper('text-replace', 'Hello world', /(Hello) (world)/g, 
+        function (matchedWord, index, fullText, regexMatches) {
+          return regexMatches[0] + ' <%= grunt.template.date("20 Nov 2012 11:30:00 GMT", "dd/mm/yy") %>';
+        }), 'Hello 20/11/12');
       test.done();
     },
 

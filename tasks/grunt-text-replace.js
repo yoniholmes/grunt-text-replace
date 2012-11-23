@@ -173,7 +173,8 @@ plugin = {
           var index = arguments[arguments.length - 2];
           var fullText = arguments[arguments.length - 1];
           var regexMatches = Array.prototype.slice.call(arguments, 1, arguments.length - 2);
-          return replacement(matchedSubstring, index, fullText, regexMatches);
+          var returnValue = replacement(matchedSubstring, index, fullText, regexMatches);
+          return (typeof returnValue === 'string') ? grunt.template.process(returnValue) : returnValue;
         };
         break;
       case 'string':

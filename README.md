@@ -124,7 +124,8 @@ grunt-text-replace will throw an error. You can only use one or the other.
 - string containing a [grunt.template][grunt.template]
 - string containing regex variables `$1`, `$2`, etc
 - combination of the above
-- function where the return value will be used as the replacement text.
+- function where the return value will be used as the replacement text (supports 
+[grunt.template][grunt.template])
 
 #### function
 Where *to* is a function, the function receives 4 parameters:
@@ -157,6 +158,7 @@ replacements: [{
 
 
 ## Release History
+- v0.2.5 - 2012/11/23.  Function replacements now support grunt.template.
 - v0.2.0 - 2012/11/21.  Added tests, refactored internals, strings now replace globally within a file, updated documentation.
 - v0.1.0 - 2012/11/12.  Initial release.
 
