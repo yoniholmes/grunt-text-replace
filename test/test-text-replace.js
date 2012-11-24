@@ -8,7 +8,9 @@ exports['test-text-replace'] = {
   'Test core replacement functionality': {
     'Test string replacements': function (test) {
       test.equal(grunt.helper('text-replace', 'Hello world', 'Hello', 'Goodbye'), 'Goodbye world');
+      test.notEqual(grunt.helper('text-replace', 'Hello w000rld', 'w0*rld', 'world'), 'Hello world');
       test.equal(grunt.helper('text-replace', 'Foo bar bar', 'bar', 'foo'), 'Foo foo foo');
+      test.equal(grunt.helper('text-replace', 'Foo bar bar', 'bar', 'Foo bar'), 'Foo Foo bar Foo bar');
       test.done();
     },
 
@@ -55,8 +57,7 @@ exports['test-text-replace'] = {
         [{
           from: 'Hello',
           to: 'Hi'
-        },
-        {
+        }, {
           from: 'world',
           to: 'planet'
         }]), 'Hi planet');

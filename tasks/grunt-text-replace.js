@@ -80,9 +80,71 @@ plugin = {
   },
 
   textReplaceHelper: function (fullText, pattern, replacement) {
-    var regex = plugin.convertMatchToRegex(pattern);
-    var expandedReplacement = plugin.expandReplacement(replacement);
-    return fullText.replace(regex, expandedReplacement);
+    var matchIndex;
+    var processGruntTemplate = function (input) {
+      return typeof input === 'string' ? 
+        grunt.template.process(input) : input;
+    };
+
+    var expandReplacement = function (replacement, fullText2, to) {
+      var alteredReplacement;
+      switch (typeof replacement) {
+        case 'function':
+          alteredReplacement = function () {
+            var matchedSubstring = arguments[0];
+            var index = arguments[arguments.length - 2] || matchIndex;
+            var fullText = fullText2;
+            var regexMatches = Array.prototype.slice.call(arguments, 1, arguments.length - 2);
+            var returnValue = replacement(matchedSubstring, index, fullText, regexMatches);
+            return processGruntTemplate(returnValue);
+          };
+          break;
+        case 'string':
+          alteredReplacement = processGruntTemplate(replacement);
+          break;
+      }
+      return alteredReplacement;
+    };
+    var finalText = fullText;
+    var expandedReplacement = expandReplacement(replacement, fullText, pattern);
+    var newReplacement;
+
+    if (typeof pattern === 'string') {
+      var process = function (string, from, to) {
+        var head = string;
+        var tail = '';
+        var lastMatchIndex;
+        while ((lastMatchIndex = head.lastIndexOf(from)) !== -1) {
+          matchIndex = head.slice(0, lastMatchIndex).length;
+          tail = (head.slice(lastMatchIndex) + tail).replace(from, to);
+          head = head.slice(0, lastMatchIndex);
+        }
+        return head + tail;
+      };
+
+      // var process = function(head, tail, from, to) {
+      //   if (head.length === 0) {
+      //     return tail;
+      //   } else {
+      //     var lastIndexOf = head.lastIndexOf(from);  
+      //     if (lastIndexOf === -1) {
+      //       return process('', head.slice(0) + tail);
+      //     } else {
+      //       matchIndex = head.slice(lastIndexOf).length + 1;
+      //       return process(head.slice(0, lastIndexOf), (head.slice(lastIndexOf) + tail).replace(from, to), from, to);
+      //     }
+      //   }
+      // };
+      finalText = process(finalText, pattern, expandedReplacement);
+    } else {
+      finalText = fullText.replace(pattern, expandedReplacement);
+    } 
+
+    return finalText;
+
+    // var regex = plugin.convertMatchToRegex(pattern);
+    // var expandedReplacement = plugin.expandReplacement(replacement);
+    // return fullText.replace(pattern, expandedReplacement);
   },
 
   textReplaceMultipleHelper: function (fullText, allReplacements) {
@@ -161,27 +223,12 @@ plugin = {
   },
 
   convertMatchToRegex: function (pattern) {
+    // This is a problem... strings will become regex expressions, which we don't want.
     return typeof pattern === 'string' ? new RegExp(pattern, "g") : pattern;
   },
 
-  expandReplacement: function (replacement) {
-    var alteredReplacement;
-    switch (typeof replacement) {
-      case 'function':
-        alteredReplacement = function () {
-          var matchedSubstring = arguments[0];
-          var index = arguments[arguments.length - 2];
-          var fullText = arguments[arguments.length - 1];
-          var regexMatches = Array.prototype.slice.call(arguments, 1, arguments.length - 2);
-          var returnValue = replacement(matchedSubstring, index, fullText, regexMatches);
-          return (typeof returnValue === 'string') ? grunt.template.process(returnValue) : returnValue;
-        };
-        break;
-      case 'string':
-        alteredReplacement = grunt.template.process(replacement);
-        break;
-    }
-    return alteredReplacement;
+  expandReplacement: function (replacement, fullText2, to) {
+    
   }
 };
 
