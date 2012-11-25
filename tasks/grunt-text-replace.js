@@ -79,72 +79,40 @@ plugin = {
     });
   },
 
-  textReplaceHelper: function (fullText, pattern, replacement) {
-    var matchIndex;
-    var processGruntTemplate = function (input) {
-      return typeof input === 'string' ? 
-        grunt.template.process(input) : input;
-    };
+  textReplaceHelper: function (fullText, from, to) {
+    var matchIndex, replacement; 
 
-    var expandReplacement = function (replacement, fullText2, to) {
-      var alteredReplacement;
-      switch (typeof replacement) {
-        case 'function':
-          alteredReplacement = function () {
-            var matchedSubstring = arguments[0];
-            var index = arguments[arguments.length - 2] || matchIndex;
-            var fullText = fullText2;
-            var regexMatches = Array.prototype.slice.call(arguments, 1, arguments.length - 2);
-            var returnValue = replacement(matchedSubstring, index, fullText, regexMatches);
-            return processGruntTemplate(returnValue);
-          };
-          break;
-        case 'string':
-          alteredReplacement = processGruntTemplate(replacement);
-          break;
-      }
-      return alteredReplacement;
-    };
-    var finalText = fullText;
-    var expandedReplacement = expandReplacement(replacement, fullText, pattern);
-    var newReplacement;
+    if (typeof to === 'function') {
+      replacement = function () {
+        var matchedSubstring = arguments[0];
+        var index = arguments[arguments.length - 2] || matchIndex;
+        var regexMatches = Array.prototype.slice.call(arguments, 1, arguments.length - 2);
+        var returnValue = to(matchedSubstring, index, fullText, regexMatches);
+        return plugin.processGruntTemplate(returnValue);
+      };
+    } else {
+      replacement = plugin.processGruntTemplate(to);
+    }
 
-    if (typeof pattern === 'string') {
+    if (typeof from === 'string') {
       var process = function (string, from, to) {
         var head = string;
+        var newHead = '';
         var tail = '';
         var lastMatchIndex;
         while ((lastMatchIndex = head.lastIndexOf(from)) !== -1) {
-          matchIndex = head.slice(0, lastMatchIndex).length;
+          newHead = head.slice(0, lastMatchIndex);
+          matchIndex = newHead.length;
           tail = (head.slice(lastMatchIndex) + tail).replace(from, to);
-          head = head.slice(0, lastMatchIndex);
+          head = newHead;
         }
         return head + tail;
       };
-
-      // var process = function(head, tail, from, to) {
-      //   if (head.length === 0) {
-      //     return tail;
-      //   } else {
-      //     var lastIndexOf = head.lastIndexOf(from);  
-      //     if (lastIndexOf === -1) {
-      //       return process('', head.slice(0) + tail);
-      //     } else {
-      //       matchIndex = head.slice(lastIndexOf).length + 1;
-      //       return process(head.slice(0, lastIndexOf), (head.slice(lastIndexOf) + tail).replace(from, to), from, to);
-      //     }
-      //   }
-      // };
-      finalText = process(finalText, pattern, expandedReplacement);
+      fullText = process(fullText, from, replacement);
     } else {
-      finalText = fullText.replace(pattern, expandedReplacement);
+      fullText = fullText.replace(from, replacement);
     } 
-
-    return finalText;
-
-    // var regex = plugin.convertMatchToRegex(pattern);
-    // var expandedReplacement = plugin.expandReplacement(replacement);
-    // return fullText.replace(pattern, expandedReplacement);
+    return fullText;
   },
 
   textReplaceMultipleHelper: function (fullText, allReplacements) {
@@ -222,13 +190,9 @@ plugin = {
     }
   },
 
-  convertMatchToRegex: function (pattern) {
-    // This is a problem... strings will become regex expressions, which we don't want.
-    return typeof pattern === 'string' ? new RegExp(pattern, "g") : pattern;
-  },
-
-  expandReplacement: function (replacement, fullText2, to) {
-    
+  processGruntTemplate: function (input) {
+    return typeof input === 'string' ? 
+      grunt.template.process(input) : input;
   }
 };
 

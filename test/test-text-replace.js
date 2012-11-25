@@ -37,6 +37,14 @@ exports['test-text-replace'] = {
         function (matchedWord, index, fullText, regexMatches) {
           return index;
         }), 'Hello 6');
+      test.equal(grunt.helper('text-replace', 'Hello world', 'Hello', 
+        function (matchedWord, index, fullText, regexMatches) {
+          return index;
+        }), '0 world');
+      test.equal(grunt.helper('text-replace', 'Hello world', 'foo', 
+        function (matchedWord, index, fullText, regexMatches) {
+          return index;
+        }), 'Hello world');
       test.equal(grunt.helper('text-replace', 'Hello world', 'world', 
         function (matchedWord, index, fullText, regexMatches) {
           return fullText;
