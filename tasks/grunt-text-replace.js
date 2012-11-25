@@ -80,39 +80,9 @@ plugin = {
   },
 
   textReplaceHelper: function (fullText, from, to) {
-    var matchIndex, replacement; 
-
-    if (typeof to === 'function') {
-      replacement = function () {
-        var matchedSubstring = arguments[0];
-        var index = arguments[arguments.length - 2] || matchIndex;
-        var regexMatches = Array.prototype.slice.call(arguments, 1, arguments.length - 2);
-        var returnValue = to(matchedSubstring, index, fullText, regexMatches);
-        return plugin.processGruntTemplate(returnValue);
-      };
-    } else {
-      replacement = plugin.processGruntTemplate(to);
-    }
-
-    if (typeof from === 'string') {
-      var process = function (string, from, to) {
-        var head = string;
-        var newHead = '';
-        var tail = '';
-        var lastMatchIndex;
-        while ((lastMatchIndex = head.lastIndexOf(from)) !== -1) {
-          newHead = head.slice(0, lastMatchIndex);
-          matchIndex = newHead.length;
-          tail = (head.slice(lastMatchIndex) + tail).replace(from, to);
-          head = newHead;
-        }
-        return head + tail;
-      };
-      fullText = process(fullText, from, replacement);
-    } else {
-      fullText = fullText.replace(from, replacement);
-    } 
-    return fullText;
+    var regex = plugin.convertMatchToRegex(from);
+    var expandedReplacement = plugin.expandReplacement(to);
+    return fullText.replace(regex, expandedReplacement);
   },
 
   textReplaceMultipleHelper: function (fullText, allReplacements) {
@@ -190,9 +160,38 @@ plugin = {
     }
   },
 
-  processGruntTemplate: function (input) {
-    return typeof input === 'string' ? 
-      grunt.template.process(input) : input;
+  convertMatchToRegex: function (pattern) {
+    var regexCharacters = '\\[](){}^$-.*+?|,/';
+    if (typeof pattern === 'string') {
+      regexCharacters.split('').forEach(function (character) {
+        var characterAsRegex = new RegExp('(\\' + character + ')', 'g');
+        pattern = pattern.replace(characterAsRegex, '\\$1');
+      });
+      pattern = new RegExp(pattern, 'g');
+    } 
+    return pattern;
+  },
+
+  expandReplacement: function (replacement) {
+    var alteredReplacement;
+    switch (typeof replacement) {
+      case 'function':
+        alteredReplacement = function () {
+          var matchedSubstring = arguments[0];
+          var index = arguments[arguments.length - 2];
+          var fullText = arguments[arguments.length - 1];
+          var regexMatches = Array.prototype.slice.call(arguments, 1, arguments.length - 2);
+          var returnValue = replacement(matchedSubstring, index, fullText, 
+            regexMatches);
+          return (typeof returnValue === 'string') ? 
+            grunt.template.process(returnValue) : returnValue;
+        };
+        break;
+      case 'string':
+        alteredReplacement = grunt.template.process(replacement);
+        break;
+    }
+    return alteredReplacement;
   }
 };
 
