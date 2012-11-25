@@ -1,7 +1,9 @@
 # grunt-text-replace [!['Build status'][travis_image_url]][travis_page_url]
 
-  [travis_image_url]: https://api.travis-ci.org/yoniholmes/grunt-text-replace.png
-  [travis_page_url]: https://travis-ci.org/yoniholmes/grunt-text-replace
+  [travis_image_url]: 
+    https://api.travis-ci.org/yoniholmes/grunt-text-replace.png
+  [travis_page_url]: 
+    https://travis-ci.org/yoniholmes/grunt-text-replace
 
 
 
@@ -24,7 +26,8 @@ grunt.loadNpmTasks('grunt-text-replace');
 ```
 
   [grunt]: http://gruntjs.com/
-  [getting_started]: https://github.com/gruntjs/grunt/blob/master/docs/getting_started.md
+  [getting_started]: 
+    https://github.com/gruntjs/grunt/blob/master/docs/getting_started.md
 
 
 ## Usage
@@ -78,7 +81,8 @@ replace: {
 a [multi-task][multitask], meaning that it must contain targets, which you can 
 name anything you like.
 
-[multitask]: https://github.com/gruntjs/grunt/blob/master/docs/api.md#gruntregistermultitask
+[multitask]: 
+  https://github.com/gruntjs/grunt/blob/master/docs/api.md#gruntregistermultitask
 
 
 ### src
@@ -139,7 +143,8 @@ Where *to* is a function, the function receives 4 parameters:
 1. **matchedWord**:  the matched word
 2. **index**:  an integer representing point where word was found in a text
 3. **fullText**:  the full original text
-4. **regexMatches**:  an array containing all regex matches, empty if none defined or found.
+4. **regexMatches**:  an array containing all regex matches, empty if none 
+defined or found.
 
 
 ```javascript
@@ -160,12 +165,16 @@ replacements: [{
 ```
 
 
-[grunt.template]: https://github.com/gruntjs/grunt/blob/master/docs/api_template.md
+[grunt.template]: 
+  https://github.com/gruntjs/grunt/blob/master/docs/api_template.md
 
 
 ## Release History
+- v0.2.7 - 2012/11/25.  Fixed issue where replacing a string globally would fail 
+if regex characters were present in string. This is no longer a problem.
 - v0.2.5 - 2012/11/23.  Function replacements now support grunt.template.
-- v0.2.0 - 2012/11/21.  Added tests, refactored internals, strings now replace globally within a file, updated documentation.
+- v0.2.0 - 2012/11/21.  Added tests, refactored internals, strings now replace 
+globally within a file, updated documentation.
 - v0.1.0 - 2012/11/12.  Initial release.
 
 Patch releases will generally remain undocumented in this release history. 
