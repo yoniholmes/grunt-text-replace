@@ -11,24 +11,6 @@ module.exports = function () {
 
 
 plugin = {
-  errorMessages: {
-    noTargets: "No targets were found. Remember to wrap functionality within " +
-      "a target.",
-    noSourceFiles: "No source files found",
-    noDestination: "Destination is not defined! If you want to overwrite " +
-      "files, then make sure to set overwrite: true. If you don't wish to " +
-      "overwrite, then make sure to set a destination",
-    noReplacements: "No replacements were found.",
-    overwriteFailure: "Overwrite is to true, but a destination has also " +
-      "been defined. If you want to overwrite files, remove the destination. " +
-      "If you want to send files to a destination, then ensure overwrite is " +
-      "not set to true",
-    multipleSourceSingleDestination: "Cannot write multiple files to same " +
-      "file. If you wish to export to a directory, make sure there is a " + 
-      "trailing slash on the destination. If you wish to write to a single " +
-      "file, make sure there is only one source file"
-  },
-
   initialisePlugin: function () {
     this.registerTasks();
     this.registerHelpers();
@@ -39,15 +21,28 @@ plugin = {
   },
 
   registerHelpers: function () {
+    this.registerReplaceHelper();
     this.registerTextReplaceHelper();
     this.registerTextReplaceMultipleHelper();
     this.registerTextReplaceFileHelper();
     this.registerTextReplaceFileMultipleHelper();
-    this.registerReplaceHelper();
   },
 
   registerTextReplaceTask: function () {
     grunt.registerMultiTask('replace', 'Description', this.replaceTask);
+  },
+
+  replaceTask: function () {
+    grunt.helper('replace', {
+      src: this.data.src,
+      dest: this.data.dest,
+      overwrite: this.data.overwrite,
+      replacements: this.data.replacements
+    });
+  },
+
+  registerReplaceHelper: function () {
+    grunt.registerHelper('replace', this.replaceHelper);
   },
 
   registerTextReplaceHelper: function () {
@@ -64,19 +59,6 @@ plugin = {
 
   registerTextReplaceFileMultipleHelper: function () {
     grunt.registerHelper('text-replace-file-multiple', this.textReplaceFileMultipleHelper);
-  },
-
-  registerReplaceHelper: function () {
-    grunt.registerHelper('replace', this.replaceHelper);
-  },
-
-  replaceTask: function () {
-    grunt.helper('replace', {
-      src: this.data.src,
-      dest: this.data.dest,
-      overwrite: this.data.overwrite,
-      replacements: this.data.replacements
-    });
   },
 
   textReplaceHelper: function (fullText, from, to) {
@@ -115,49 +97,48 @@ plugin = {
   },
 
   replaceHelper: function (settings) {
-    var src = settings.src;
-    var srcLength = typeof src === 'undefined' ? 0 : grunt.file.expandFiles(src).length;
+    var src = grunt.file.expandFiles(settings.src || []);
     var dest = settings.dest;
     var overwrite = settings.overwrite;
     var replacements = settings.replacements;
     var isDestinationDirectory = (/\/$/).test(dest);
     var initialWarnCount = grunt.fail.warncount;
 
-    // No target defined
     if (typeof dest === 'undefined' &&
         typeof src === 'undefined' &&
         typeof replacements === 'undefined') {
-      grunt.warn(plugin.errorMessages.noTargets);
-    }
-
-    // No source
-    if (srcLength === 0) {
+      grunt.warn(plugin.errorMessages.noTargetsDefined);
+    } else if (src.length === 0) {
       grunt.warn(plugin.errorMessages.noSourceFiles);
-    }
-
-    // No destination
-    if (typeof dest === 'undefined' && overwrite !== true) {
+    } else if (typeof dest === 'undefined' && overwrite !== true) {
       grunt.warn(plugin.errorMessages.noDestination);
-    }
-
-    // No replacements
-    if (typeof replacements === 'undefined') {
+    } else if (typeof replacements === 'undefined') {
       grunt.warn(plugin.errorMessages.noReplacements);
-    }
-
-    // Overwrite not possible
-    if (typeof dest !== 'undefined' && overwrite === true) {
+    } else if (typeof dest !== 'undefined' && overwrite === true) {
       grunt.warn(plugin.errorMessages.overwriteFailure);
-    }
-
-    // Desitination error
-    if (isDestinationDirectory === false && srcLength > 1) {
+    } else if (isDestinationDirectory === false && src.length > 1) {
       grunt.warn(plugin.errorMessages.multipleSourceSingleDestination);
-    }
-
-    if (grunt.fail.warncount - initialWarnCount === 0) {
+    } else if (grunt.fail.warncount - initialWarnCount === 0) {
       grunt.helper('text-replace-file-multiple', src, dest, replacements);
     }
+  },
+
+  errorMessages: {
+    noTargetsDefined: "No targets were found. Remember to wrap functionality " + 
+      "within a target.",
+    noSourceFiles: "No source files found",
+    noDestination: "Destination is not defined! If you want to overwrite " +
+      "files, then make sure to set overwrite: true. If you don't wish to " +
+      "overwrite, then make sure to set a destination",
+    noReplacements: "No replacements were found.",
+    overwriteFailure: "Overwrite is to true, but a destination has also " +
+      "been defined. If you want to overwrite files, remove the destination. " +
+      "If you want to send files to a destination, then ensure overwrite is " +
+      "not set to true",
+    multipleSourceSingleDestination: "Cannot write multiple files to same " +
+      "file. If you wish to export to a directory, make sure there is a " + 
+      "trailing slash on the destination. If you wish to write to a single " +
+      "file, make sure there is only one source file"
   },
 
   convertMatchToRegex: function (pattern) {
