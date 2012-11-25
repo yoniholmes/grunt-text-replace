@@ -1,9 +1,7 @@
 # grunt-text-replace [!['Build status'][travis_image_url]][travis_page_url]
 
-  [travis_image_url]: 
-    https://api.travis-ci.org/yoniholmes/grunt-text-replace.png
-  [travis_page_url]: 
-    https://travis-ci.org/yoniholmes/grunt-text-replace
+[travis_image_url]: https://api.travis-ci.org/yoniholmes/grunt-text-replace.png
+[travis_page_url]: https://travis-ci.org/yoniholmes/grunt-text-replace
 
 
 
@@ -25,9 +23,8 @@ Then add this line to your project's [gruntfile][getting_started]:
 grunt.loadNpmTasks('grunt-text-replace');
 ```
 
-  [grunt]: http://gruntjs.com/
-  [getting_started]: 
-    https://github.com/gruntjs/grunt/blob/master/docs/getting_started.md
+[grunt]: http://gruntjs.com/
+[getting_started]: https://github.com/gruntjs/grunt/blob/master/docs/getting_started.md
 
 
 ## Usage
@@ -81,8 +78,7 @@ replace: {
 a [multi-task][multitask], meaning that it must contain targets, which you can 
 name anything you like.
 
-[multitask]: 
-  https://github.com/gruntjs/grunt/blob/master/docs/api.md#gruntregistermultitask
+[multitask]: https://github.com/gruntjs/grunt/blob/master/docs/api.md#gruntregistermultitask
 
 
 ### src
@@ -165,8 +161,7 @@ replacements: [{
 ```
 
 
-[grunt.template]: 
-  https://github.com/gruntjs/grunt/blob/master/docs/api_template.md
+[grunt.template]: https://github.com/gruntjs/grunt/blob/master/docs/api_template.md
 
 
 ## Release History
