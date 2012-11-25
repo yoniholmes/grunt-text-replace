@@ -29,7 +29,10 @@ plugin = {
   },
 
   registerTextReplaceTask: function () {
-    grunt.registerMultiTask('replace', 'Description', this.replaceTask);
+    grunt.registerMultiTask('replace', 
+      'General purpose text replacement for grunt. Allows you to replace ' +
+      'text in files using strings, regexs or functions.', 
+        this.replaceTask);
   },
 
   replaceTask: function () {
@@ -42,38 +45,53 @@ plugin = {
   },
 
   registerReplaceHelper: function () {
-    grunt.registerHelper('replace', this.replaceHelper);
+    grunt.registerHelper('replace', 
+      this.replaceHelper);
   },
 
   registerTextReplaceHelper: function () {
-    grunt.registerHelper('text-replace', this.textReplaceHelper);
+    grunt.registerHelper('text-replace', 
+      this.textReplaceHelper);
   },
 
   registerTextReplaceMultipleHelper: function () {
-    grunt.registerHelper('text-replace-multiple', this.textReplaceMultipleHelper);
+    grunt.registerHelper('text-replace-multiple', 
+      this.textReplaceMultipleHelper);
   },
 
   registerTextReplaceFileHelper: function () {
-    grunt.registerHelper('text-replace-file', this.textReplaceFileHelper);
+    grunt.registerHelper('text-replace-file', 
+      this.textReplaceFileHelper);
   },
 
   registerTextReplaceFileMultipleHelper: function () {
-    grunt.registerHelper('text-replace-file-multiple', this.textReplaceFileMultipleHelper);
+    grunt.registerHelper('text-replace-file-multiple', 
+      this.textReplaceFileMultipleHelper);
   },
 
   textReplaceHelper: function (fullText, from, to) {
-    var regex = plugin.convertMatchToRegex(from);
+    var regex = plugin.convertPatternToRegex(from);
     var expandedReplacement = plugin.expandReplacement(to);
     return fullText.replace(regex, expandedReplacement);
   },
 
   textReplaceMultipleHelper: function (fullText, allReplacements) {
     return allReplacements.reduce(function (fullText, replacement) {
-      return grunt.helper('text-replace', fullText, replacement.from, replacement.to);
+      return grunt.helper('text-replace', 
+        fullText, replacement.from, replacement.to);
     }, fullText);
   },
 
   textReplaceFileHelper: function (pathToSource, dest, replacements) {
+    var pathToDestination = plugin.getPathToDestination(pathToSource, dest);
+    grunt.file.copy(pathToSource, pathToDestination, {
+      process: function (fullText) {
+        return grunt.helper('text-replace-multiple', fullText, replacements);
+      }
+    });  
+  },
+
+  getPathToDestination: function (pathToSource, dest) {
     var isDestinationDirectory = (/\/$/).test(dest);
     var fileName = path.basename(pathToSource);
     var pathToDestination;
@@ -82,11 +100,7 @@ plugin = {
     } else {
       pathToDestination = dest + (isDestinationDirectory ? fileName : '');
     }
-    grunt.file.copy(pathToSource, pathToDestination, {
-      process: function (fullText) {
-        return grunt.helper('text-replace-multiple', fullText, replacements);
-      }
-    });  
+    return pathToDestination;
   },
 
   textReplaceFileMultipleHelper: function (src, dest, replacements) {
@@ -141,7 +155,7 @@ plugin = {
       "file, make sure there is only one source file"
   },
 
-  convertMatchToRegex: function (pattern) {
+  convertPatternToRegex: function (pattern) {
     var regexCharacters = '\\[](){}^$-.*+?|,/';
     if (typeof pattern === 'string') {
       regexCharacters.split('').forEach(function (character) {
@@ -154,25 +168,29 @@ plugin = {
   },
 
   expandReplacement: function (replacement) {
-    var alteredReplacement;
-    switch (typeof replacement) {
-      case 'function':
-        alteredReplacement = function () {
-          var matchedSubstring = arguments[0];
-          var index = arguments[arguments.length - 2];
-          var fullText = arguments[arguments.length - 1];
-          var regexMatches = Array.prototype.slice.call(arguments, 1, arguments.length - 2);
-          var returnValue = replacement(matchedSubstring, index, fullText, 
-            regexMatches);
-          return (typeof returnValue === 'string') ? 
-            grunt.template.process(returnValue) : returnValue;
-        };
-        break;
-      case 'string':
-        alteredReplacement = grunt.template.process(replacement);
-        break;
+    if (typeof replacement === 'function') {
+      return this.expandFunctionReplacement(replacement);
+    } else if (typeof replacement === 'string') {
+      return this.expandStringReplacement(replacement);
     }
-    return alteredReplacement;
+  },
+
+  expandFunctionReplacement: function (replacement) {
+    return function () {
+      var matchedSubstring = arguments[0];
+      var index = arguments[arguments.length - 2];
+      var fullText = arguments[arguments.length - 1];
+      var regexMatches = Array.prototype.slice.call(arguments, 1,
+        arguments.length - 2);
+      var returnValue = replacement(matchedSubstring, index, fullText, 
+        regexMatches);
+      return (typeof returnValue === 'string') ? 
+        grunt.template.process(returnValue) : returnValue;
+    };
+  },
+
+  expandStringReplacement: function (replacement) {
+    return grunt.template.process(replacement);
   }
 };
 
