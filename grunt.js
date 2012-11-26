@@ -54,7 +54,7 @@ module.exports = function (grunt) {
         }]
       },
       overwrite: {
-        src: ['test/modified/example.txt'],
+        src: ['test/modified/*'],
         overwrite: true,
         replacements: [{
           from: 'World',
