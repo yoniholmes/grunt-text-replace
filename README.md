@@ -165,6 +165,7 @@ replacements: [{
 
 
 ## Release History
+- v0.2.9 - 2012/11/26.  Fixed issue where overwrite: true was not working where multiple src files were defined.
 - v0.2.7 - 2012/11/25.  Fixed issue where replacing a string globally would fail 
 if regex characters were present in string. This is no longer a problem.
 - v0.2.5 - 2012/11/23.  Function replacements now support grunt.template.

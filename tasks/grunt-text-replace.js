@@ -130,7 +130,7 @@ plugin = {
       grunt.warn(plugin.errorMessages.noReplacements);
     } else if (typeof dest !== 'undefined' && overwrite === true) {
       grunt.warn(plugin.errorMessages.overwriteFailure);
-    } else if (isDestinationDirectory === false && src.length > 1) {
+    } else if ((isDestinationDirectory === false && src.length > 1) && overwrite !== true) {
       grunt.warn(plugin.errorMessages.multipleSourceSingleDestination);
     } else if (grunt.fail.warncount - initialWarnCount === 0) {
       grunt.helper('text-replace-file-multiple', src, dest, replacements);

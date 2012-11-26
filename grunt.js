@@ -52,6 +52,14 @@ module.exports = function (grunt) {
           from: /[0-9]{1,2}\/[0-9]{1,2}\/[0-9]{2,4}/g,
           to: "<%= grunt.template.today('dd/mm/yyyy') %>"
         }]
+      },
+      overwrite: {
+        src: ['test/modified/example.txt'],
+        overwrite: true,
+        replacements: [{
+          from: 'World',
+          to: 'PLANET'
+        }]
       }
     }
   });

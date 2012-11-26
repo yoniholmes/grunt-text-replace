@@ -89,6 +89,12 @@ exports['test-text-replace'] = {
       });
       test.equal(grunt.fail.warncount - warnCountBefore, 1);
       grunt.helper('replace', {
+        src: 'test/temp/*',
+        overwrite: true,
+        replacements: [{ from: 'Hello', to: 'Good bye' }]
+      });
+      test.equal(grunt.fail.warncount - warnCountBefore, 1);
+      grunt.helper('replace', {
         src: 'test/temp/testA.txt',
         overwrite: true,
         replacements: [{ from: 'Hello', to: 'Good bye' }]
