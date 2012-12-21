@@ -1,11 +1,11 @@
 "use strict";
 
-var grunt = require('grunt');
+var grunt;
 var path = require('path');
 var plugin;
 
-
-module.exports = function () {
+module.exports = function (referenceToGrunt) {
+  grunt = referenceToGrunt;
   plugin.initialisePlugin();
 };
 
