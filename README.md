@@ -165,6 +165,7 @@ replacements: [{
 
 
 ## Release History
+- v0.2.10 - 2012/12/21.  Minor internal refactor to better support globally installed instances of grunt on some systems.
 - v0.2.9 - 2012/11/26.  Fixed issue where overwrite: true was not working where multiple src files were defined.
 - v0.2.7 - 2012/11/25.  Fixed issue where replacing a string globally would fail 
 if regex characters were present in string. This is no longer a problem.
