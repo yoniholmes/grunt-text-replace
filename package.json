@@ -1,23 +1,20 @@
 {
   "name": "grunt-text-replace",
-  "description": "FOOOOO",
-  "version": "0.1.0",
+  "description": "Replace text in files using strings, regexs or functions.",
+  "version": "0.3.0",
   "homepage": "https://github.com/Yoni/grunt-4-test",
-  "author": {
-    "name": "Jonathan Holmes",
-    "email": "yoni.holmes@gmail.com"
-  },
+  "author": "Jonathan Holmes",
   "repository": {
     "type": "git",
-    "url": "git://github.com/Yoni/grunt-4-test.git"
+    "url": "https://github.com/yoniholmes/grunt-text-replace.git"
   },
   "bugs": {
-    "url": "https://github.com/Yoni/grunt-4-test/issues"
+    "url": "https://github.com/yoniholmes/grunt-text-replace/issues"
   },
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/Yoni/grunt-4-test/blob/master/LICENSE-MIT"
+      "url": "https://github.com/yoniholmes/grunt-text-replace.git/blob/master/LICENSE-MIT"
     }
   ],
   "main": "Gruntfile.js",
@@ -25,15 +22,19 @@
     "node": ">= 0.8.0"
   },
   "scripts": {
-    "test": "grunt test"
+    "test": "grunt test --force"
   },
   "devDependencies": {
-    "grunt-contrib-jshint": "0.1.1rc6",
-    "grunt-contrib-clean": "0.4.0rc6",
-    "grunt-contrib-nodeunit": "0.1.2rc6",
-    "grunt": "0.4.0rc6"
+    "grunt-contrib-jshint": ">= 0.1.1rc6",
+    "grunt-contrib-nodeunit": ">= 0.1.2rc6",
+    "grunt": ">= 0.4.0rc6"
   },
   "keywords": [
-    "gruntplugin"
+    "gruntplugin",
+    "replace",
+    "text",
+    "string",
+    "regex",
+    "function"
   ]
 }

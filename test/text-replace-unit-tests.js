@@ -39,7 +39,7 @@ var replaceFileMultiple = function (sourceFiles, destinationDirectory, replaceme
 };
 
 
-exports.replace = {
+exports.textReplace = {
   'Test core replacement functionality': {
     'Test string replacements': function (test) {
       test.equal(replaceText('Hello world', 'Hello', 'Goodbye'), 'Goodbye world');

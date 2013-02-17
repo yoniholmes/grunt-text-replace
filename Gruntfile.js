@@ -1,16 +1,7 @@
-/*
- * grunt-text-replace
- * https://github.com/Yoni/grunt-4-test
- *
- * Copyright (c) 2013 Jonathan Holmes
- * Licensed under the MIT license.
- */
-
 'use strict';
 
 module.exports = function(grunt) {
 
-  // Project configuration.
   grunt.initConfig({
     jshint: {
       all: [
@@ -23,51 +14,78 @@ module.exports = function(grunt) {
       },
     },
 
-    // Before generating any new files, remove any previously-created files.
-    clean: {
-      tests: ['tmp'],
-    },
-
-    // Configuration to be run (and then tested).
     replace: {
-      default_options: {
-        options: {
-        },
-        files: {
-          'tmp/default_options': ['test/fixtures/testing', 'test/fixtures/123'],
-        },
+      example: {
+        src: ['test/text_files/example.txt'],
+        dest: 'test/modified/',
+        replacements: [{ 
+          from: 'Hello', 
+          to: 'Good bye' 
+        }, { 
+          from: /(f|F)(o{2,100})/g, 
+          to: 'M$2' 
+        }, { 
+          from: /"localhost"/, 
+          to: function (matchedWord, index, fullText, regexMatches) {
+            return '"www.mysite.com"';
+          } 
+        }, { 
+          from: '<p>Version:</p>', 
+          to: '<p>Version: <%= grunt.template.today("yyyy-mm-dd") %></p>'
+        }, {
+          from: /[0-9]{1,2}\/[0-9]{1,2}\/[0-9]{2,4}/g,
+          to: "<%= grunt.template.today('dd/mm/yyyy') %>"
+        }]
       },
-      custom_options: {
-        options: {
-          separator: ': ',
-          punctuation: ' !!!',
-        },
-        files: {
-          'tmp/custom_options': ['test/fixtures/testing', 'test/fixtures/123'],
-        },
-      },
+
+      overwrite: {
+        src: ['test/modified/*'],
+        overwrite: true,
+        replacements: [{
+          from: 'World',
+          to: 'PLANET'
+        }]
+      }
+     
     },
 
-    // Unit tests.
     nodeunit: {
-      tests: ['test/*-test.js'],
+      errors: ['test/text-replace-error-tests.js'],
+      tests: ['test/text-replace-unit-tests.js'],
+      replace: ['test/text-replace-functional-tests.js'],
     },
 
   });
 
-  // Actually load this plugin's task(s).
   grunt.loadTasks('tasks');
-
-  // These plugins provide necessary tasks.
   grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-nodeunit');
 
-  // Whenever the "test" task is run, first clean the "tmp" dir, then run this
-  // plugin's task(s), then test the result.
-  grunt.registerTask('test', ['clean', 'replace', 'nodeunit']);
-
-  // By default, lint and run all tests.
   grunt.registerTask('default', ['jshint', 'test']);
 
+/*  
+    A note on testing (ie. running: grunt test):
+    
+    There are two kinds of tests:
+
+    - Tests that don't result in a warning  
+    - Test that do result in a warning (grunt.warn())
+
+    I haven't been able to find a convenient way of testing for grunt.warn() 
+    events without enabling '--force' when running grunt. For this reason I've
+    set up the 'test' task to just run the main tests, and only if --force is on
+    to run the error-throwing tests.
+
+*/
+
+  grunt.registerTask('test', function () {
+    var isForceOn = grunt.option('force') || false;
+    var taskList = ['nodeunit:tests'];
+    if (isForceOn) {
+      taskList.push('nodeunit:errors');
+    }
+    taskList.push('replace');
+    taskList.push('nodeunit:replace');
+    grunt.task.run(taskList);
+  });
 };
