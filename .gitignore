@@ -1,2 +1,4 @@
-node_modules/
-test/modified/
+node_modules
+npm-debug.log
+test/modified
+tmp
