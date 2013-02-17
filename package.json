@@ -22,7 +22,7 @@
     "node": ">= 0.8.0"
   },
   "scripts": {
-    "test": "grunt test --force"
+    "test": "grunt --force"
   },
   "devDependencies": {
     "grunt-contrib-jshint": ">= 0.1.1rc6",
