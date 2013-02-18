@@ -155,12 +155,22 @@ replacements: [{
 // The new text will now be:  "Hello planet"
 ```
 
-
 [grunt.template]: https://github.com/gruntjs/grunt/blob/master/docs/api_template.md
+
+## Road map
+Some changes I'm considering. Happy to receive suggestions for/against:
+- **Consolidate function parameters.** This would mean replacing the 4 existing 
+function parameters 'matchedWord', 'index', 'fullText' and 'regexMatches' with a single 
+'data' object with 4 members.
+- **Source/Destination paths in function callback**. The above change makes it easier to 
+add the source and destination paths as part of the data parameter in the function callback, 
+which is a requested feature.
+- **Grunt 4.0 'files' and 'options'**. At some point I might move to bringing the plugin
+in alignment with the Grunt 4.0 convention of having standard 'files' and 'options' objects. 
 
 
 ## Release History
-- v0.3.0 - 2013/02/17.  Updated to work in Grunt 4.0. This release is not backwards compatible with grunt 3.x.
+- v0.3.0 - 2013/02/17.  Updated to work in Grunt 4.0. This release is not backwards compatible with grunt 0.3.x.
 - v0.2.10 - 2012/12/21.  Minor internal refactor to better support globally installed instances of grunt on some systems.
 - v0.2.9 - 2012/11/26.  Fixed issue where overwrite: true was not working where multiple src files were defined.
 - v0.2.7 - 2012/11/25.  Fixed issue where replacing a string globally would fail 
