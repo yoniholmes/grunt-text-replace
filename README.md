@@ -172,7 +172,10 @@ the plugin.
 replace: {
   prevent_templates_example: {
     src: ['text/*.txt'],
-    dest: 'build/text/'
+    dest: 'build/text/',
+    options: {
+      processTemplates: false
+    },
     replacements: [{ 
       from: /url\(.*\)/g,
       to: function () {
@@ -200,7 +203,8 @@ in alignment with the Grunt 4.0 convention of having standard 'files' and 'optio
 
 
 ## Release History
-- v0.3.1 - 2013/02/18.  Minor feature addition: processTemplates: false to switch off grunt templates in function return statements.
+- v0.3.1
+ - 2013/02/18.  Minor feature addition: processTemplates: false to switch off grunt templates in function return statements.
 - v0.3.0 - 2013/02/17.  Updated to work in Grunt 4.0. This release is not backwards compatible with grunt 0.3.x.
 - v0.2.10 - 2012/12/21.  Minor internal refactor to better support globally installed instances of grunt on some systems.
 - v0.2.9 - 2012/11/26.  Fixed issue where overwrite: true was not working where multiple src files were defined.
