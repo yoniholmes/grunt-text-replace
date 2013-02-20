@@ -43,7 +43,6 @@ exports.textReplace = {
   'Test core replacement functionality': {
     'Test string replacements': function (test) {
       test.equal(replaceText('Hello world', 'Hello', 'Goodbye'), 'Goodbye world');
-      test.equal(replaceText('Hello world', 'Hello', 'Goodbye'), 'Goodbye world');
       test.notEqual(replaceText('Hello w000rld', 'w0*rld', 'world'), 'Hello world');
       test.equal(replaceText('Hello (*foo.)', '(*foo.)', 'world'), 'Hello world');
       test.equal(replaceText('Hello \\foo', '\\', ''), 'Hello foo');
