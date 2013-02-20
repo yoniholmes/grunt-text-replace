@@ -41,11 +41,25 @@ module.exports = function(grunt) {
       },
 
       overwrite: {
-        src: ['test/modified/*'],
+        src: ['test/modified/example.txt'],
         overwrite: true,
         replacements: [{
           from: 'World',
           to: 'PLANET'
+        }]
+      },
+
+      disable_template_processing: {
+        src: ['test/text_files/template-example.txt'],
+        dest: 'test/modified/',
+        options: {
+          processTemplates: false
+        },
+        replacements: [{
+          from: /url\(.*\)/g,
+          to: function () {
+            return "url(<% some unprocessed text %>)";
+          }
         }]
       }
      
