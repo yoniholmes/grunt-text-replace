@@ -34,7 +34,9 @@ module.exports = function(grunt) {
           to: '<p>Version: <%= grunt.template.date("18 Feb 2013", "yyyy-mm-dd") %></p>'
         }, {
           from: /[0-9]{1,2}\/[0-9]{1,2}\/[0-9]{2,4}/g,
-          to: "<%= grunt.template.date('18 Feb 2013', 'dd/mm/yyyy') %>"
+          to: function() {
+            return "<%= grunt.template.date('18 Feb 2013', 'dd/mm/yyyy') %>";
+          }
         }]
       },
 

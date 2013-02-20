@@ -155,6 +155,35 @@ replacements: [{
 // The new text will now be:  "Hello planet"
 ```
 
+### options
+
+*options* is an object, specific to a target, and the only supported option is 
+*processTemplates*
+
+#### processTemplates
+
+*processTemplates* when set to false (by default it is true) switches off 
+grunt.template processing within function return statements. It doesn't work for 
+string replacements (ie. when the replacement is a string, not a function), as 
+grunt processes templates within config string values before they are passed to 
+the plugin. 
+
+```javascript
+replace: {
+  prevent_templates_example: {
+    src: ['text/*.txt'],
+    dest: 'build/text/'
+    replacements: [{ 
+      from: /url\(.*\)/g,
+      to: function () {
+        return "url(<% Don't process this template, retain the delimeters %>)";
+      }
+    }]
+  }
+}
+```
+
+
 [grunt.template]: https://github.com/gruntjs/grunt/blob/master/docs/api_template.md
 
 ## Road map
@@ -170,6 +199,7 @@ in alignment with the Grunt 4.0 convention of having standard 'files' and 'optio
 
 
 ## Release History
+- v0.3.1 - 2013/02/18.  Minor feature addition: processTemplates: false to switch off grunt templates in function return statements.
 - v0.3.0 - 2013/02/17.  Updated to work in Grunt 4.0. This release is not backwards compatible with grunt 0.3.x.
 - v0.2.10 - 2012/12/21.  Minor internal refactor to better support globally installed instances of grunt on some systems.
 - v0.2.9 - 2012/11/26.  Fixed issue where overwrite: true was not working where multiple src files were defined.
