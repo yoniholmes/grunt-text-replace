@@ -188,6 +188,7 @@ replace: {
 
 ## Road map
 Some changes I'm considering. Happy to receive suggestions for/against:
+
 - **Consolidate function parameters.** This would mean replacing the 4 existing 
 function parameters 'matchedWord', 'index', 'fullText' and 'regexMatches' with a single 
 'data' object with 4 members.
