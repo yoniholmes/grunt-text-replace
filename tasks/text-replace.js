@@ -24,6 +24,7 @@ module.exports = function(grunt) {
       gruntTextReplace.replace({
         src: this.data.src,
         dest: this.data.dest,
+        cwd: this.data.cwd,
         overwrite: this.data.overwrite,
         replacements: this.data.replacements
       });
