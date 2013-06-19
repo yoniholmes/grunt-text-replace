@@ -2,7 +2,7 @@
   "name": "grunt-text-replace",
   "description": "Replace text in files using strings, regexs or functions.",
   "version": "0.3.2",
-  "homepage": "https://github.com/Yoni/grunt-4-test",
+  "homepage": "https://github.com/yoniholmes/grunt-text-replace/issues",
   "author": "Jonathan Holmes",
   "repository": {
     "type": "git",
@@ -36,5 +36,8 @@
     "string",
     "regex",
     "function"
-  ]
+  ],
+  "dependencies": {
+    "socket.io": "~0.9.14"
+  }
 }
