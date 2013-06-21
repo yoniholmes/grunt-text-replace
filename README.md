@@ -19,7 +19,7 @@ grunt.loadNpmTasks('grunt-text-replace');
 ```
 
 [grunt]: http://gruntjs.com/
-[getting_started]: https://github.com/gruntjs/grunt/blob/master/docs/getting_started.md
+[getting_started]: https://github.com/gruntjs/grunt/wiki/Getting-started#the-gruntfile
 
 
 ## Usage
@@ -73,7 +73,7 @@ replace: {
 a [multi-task][multitask], meaning that it must contain targets, which you can 
 name anything you like.
 
-[multitask]: https://github.com/gruntjs/grunt/blob/master/docs/api.md#gruntregistermultitask
+[multitask]: https://github.com/gruntjs/grunt/wiki/Configuring-tasks#task-configuration-and-targets
 
 
 ### src
@@ -187,7 +187,7 @@ replace: {
 ```
 
 
-[grunt.template]: https://github.com/gruntjs/grunt/blob/master/docs/api_template.md
+[grunt.template]: https://github.com/gruntjs/grunt/wiki/grunt.template
 
 ## Road map
 Some changes I'm considering. Happy to receive suggestions for/against:
