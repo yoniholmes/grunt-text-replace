@@ -25,8 +25,8 @@
     "test": "grunt --force"
   },
   "devDependencies": {
-    "grunt-contrib-jshint": ">= 0.1.1rc6",
-    "grunt-contrib-nodeunit": ">= 0.1.2rc6",
+    "grunt-contrib-jshint": ">= 0.6.3",
+    "grunt-contrib-nodeunit": ">= 0.2.0",
     "grunt": ">= 0.4.1"
   },
   "keywords": [

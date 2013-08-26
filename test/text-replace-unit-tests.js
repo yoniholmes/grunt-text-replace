@@ -1,5 +1,3 @@
-'use strict';
-
 var grunt = require('grunt');
 var fs = require('fs');
 var gruntTextReplace = require('../lib/grunt-text-replace');
@@ -7,7 +5,7 @@ var gruntTextReplace = require('../lib/grunt-text-replace');
 
 var replaceText = function (text, from, to) {
   return gruntTextReplace.replaceText({
-    text: text, 
+    text: text,
     replacements: [{
       from: from,
       to: to
@@ -17,7 +15,7 @@ var replaceText = function (text, from, to) {
 
 var replaceTextMultiple = function (text, replacements) {
   return gruntTextReplace.replaceText({
-    text: text, 
+    text: text,
     replacements: replacements
   });
 };
@@ -57,40 +55,40 @@ exports.textReplace = {
       test.equal(replaceText('Foo bar bar', /bar/, 'foo'), 'Foo foo bar');
       test.equal(replaceText('Foo bar bar', /bar/g, 'foo'), 'Foo foo foo');
       test.done();
-    },  
+    },
 
     'Test grunt.template replacements': function (test) {
-      test.equal(replaceText('Hello world', 'world', 
+      test.equal(replaceText('Hello world', 'world',
         '<%= grunt.template.date("20 Nov 2012 11:30:00 GMT", "dd/mm/yy") %>'), 'Hello 20/11/12');
       test.done();
     },
 
     'Test function replacements': function (test) {
-      test.equal(replaceText('Hello world', 'world', 
+      test.equal(replaceText('Hello world', 'world',
         function (matchedWord, index, fullText, regexMatches) {
           return new Array(4).join(matchedWord);
         }), 'Hello worldworldworld');
-      test.equal(replaceText('Hello world', 'world', 
+      test.equal(replaceText('Hello world', 'world',
         function (matchedWord, index, fullText, regexMatches) {
           return index;
         }), 'Hello 6');
-      test.equal(replaceText('Hello world', 'Hello', 
+      test.equal(replaceText('Hello world', 'Hello',
         function (matchedWord, index, fullText, regexMatches) {
           return index;
         }), '0 world');
-      test.equal(replaceText('Hello world', 'foo', 
+      test.equal(replaceText('Hello world', 'foo',
         function (matchedWord, index, fullText, regexMatches) {
           return index;
         }), 'Hello world');
-      test.equal(replaceText('Hello world', 'world', 
+      test.equal(replaceText('Hello world', 'world',
         function (matchedWord, index, fullText, regexMatches) {
           return fullText;
         }), 'Hello Hello world');
-      test.equal(replaceText('Hello world', /(Hello) (world)/g, 
+      test.equal(replaceText('Hello world', /(Hello) (world)/g,
         function (matchedWord, index, fullText, regexMatches) {
           return 'Place: ' + regexMatches[1] + ', Greeting: ' + regexMatches[0];
         }), 'Place: world, Greeting: Hello');
-      test.equal(replaceText('Hello world', /(Hello) (world)/g, 
+      test.equal(replaceText('Hello world', /(Hello) (world)/g,
         function (matchedWord, index, fullText, regexMatches) {
           return regexMatches[0] + ' <%= grunt.template.date("20 Nov 2012 11:30:00 GMT", "dd/mm/yy") %>';
         }), 'Hello 20/11/12');
@@ -116,7 +114,7 @@ exports.textReplace = {
       grunt.file.copy('test/text_files/test.txt', 'test/temp/testB.txt');
       done();
     },
-    
+
     tearDown: function (done) {
       fs.unlinkSync('test/temp/testA.txt');
       fs.unlinkSync('test/temp/testB.txt');

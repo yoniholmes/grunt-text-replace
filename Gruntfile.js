@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = function(grunt) {
 
   grunt.initConfig({
@@ -18,19 +16,19 @@ module.exports = function(grunt) {
       example: {
         src: ['test/text_files/example.txt'],
         dest: 'test/modified/',
-        replacements: [{ 
-          from: 'Hello', 
-          to: 'Good bye' 
-        }, { 
-          from: /(f|F)(o{2,100})/g, 
-          to: 'M$2' 
-        }, { 
-          from: /"localhost"/, 
+        replacements: [{
+          from: 'Hello',
+          to: 'Good bye'
+        }, {
+          from: /(f|F)(o{2,100})/g,
+          to: 'M$2'
+        }, {
+          from: /"localhost"/,
           to: function (matchedWord, index, fullText, regexMatches) {
             return '"www.mysite.com"';
-          } 
-        }, { 
-          from: '<p>Version:</p>', 
+          }
+        }, {
+          from: '<p>Version:</p>',
           to: '<p>Version: <%= grunt.template.date("18 Feb 2013", "yyyy-mm-dd") %></p>'
         }, {
           from: /[0-9]{1,2}\/[0-9]{1,2}\/[0-9]{2,4}/g,
@@ -62,7 +60,7 @@ module.exports = function(grunt) {
           }
         }]
       }
-     
+
     },
 
     nodeunit: {
@@ -79,15 +77,15 @@ module.exports = function(grunt) {
 
   grunt.registerTask('default', ['jshint', 'test']);
 
-/*  
+/*
     A note on testing (ie. running: grunt test):
-    
+
     There are two kinds of tests:
 
-    - Tests that don't result in a warning  
+    - Tests that don't result in a warning
     - Test that do result in a warning (grunt.warn())
 
-    I haven't been able to find a convenient way of testing for grunt.warn() 
+    I haven't been able to find a convenient way of testing for grunt.warn()
     events without enabling '--force' when running grunt. For this reason I've
     set up the 'test' task to just run the main tests, and only if --force is on
     to run the error-throwing tests.

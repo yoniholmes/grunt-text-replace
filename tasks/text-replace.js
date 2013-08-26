@@ -6,8 +6,6 @@
  * Licensed under the MIT license.
  */
 
-'use strict';
-
 var gruntTextReplace = require('../lib/grunt-text-replace');
 
 module.exports = function(grunt) {
@@ -17,9 +15,9 @@ module.exports = function(grunt) {
   // Please see the grunt documentation for more information regarding task
   // creation: https://github.com/gruntjs/grunt/blob/devel/docs/toc.md
 
-  grunt.registerMultiTask('replace', 
+  grunt.registerMultiTask('replace',
     'General purpose text replacement for grunt. Allows you to replace ' +
-    'text in files using strings, regexs or functions.', 
+    'text in files using strings, regexs or functions.',
     function () {
       gruntTextReplace.replace({
         src: this.data.src,

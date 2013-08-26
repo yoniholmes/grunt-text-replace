@@ -1,5 +1,3 @@
-"use strict";
-
 var grunt = require('grunt');
 var fs = require('fs');
 var gruntTextReplace = require('../lib/grunt-text-replace');
@@ -19,7 +17,7 @@ exports.textReplace = {
       grunt.file.copy('test/text_files/test.txt', 'test/temp/testB.txt');
       done();
     },
-    
+
     tearDown: function (done) {
       fs.unlinkSync('test/temp/testA.txt');
       fs.unlinkSync('test/temp/testB.txt');
