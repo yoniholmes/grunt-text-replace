@@ -2,7 +2,7 @@
   "name": "grunt-text-replace",
   "description": "Replace text in files using strings, regexs or functions.",
   "version": "0.3.6",
-  "homepage": "https://github.com/yoniholmes/grunt-text-replace/issues",
+  "homepage": "https://github.com/yoniholmes/grunt-text-replace",
   "author": "Jonathan Holmes",
   "repository": {
     "type": "git",
@@ -27,7 +27,7 @@
   "devDependencies": {
     "grunt-contrib-jshint": ">= 0.1.1rc6",
     "grunt-contrib-nodeunit": ">= 0.1.2rc6",
-    "grunt": ">= 0.4.0rc6"
+    "grunt": ">= 0.4.1"
   },
   "keywords": [
     "gruntplugin",
