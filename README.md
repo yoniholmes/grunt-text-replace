@@ -19,7 +19,7 @@ grunt.loadNpmTasks('grunt-text-replace');
 ```
 
 [grunt]: http://gruntjs.com/
-[getting_started]: https://github.com/gruntjs/grunt/blob/master/docs/getting_started.md
+[getting_started]: https://github.com/gruntjs/grunt/wiki/Getting-started#the-gruntfile
 
 
 ## Usage
@@ -73,7 +73,7 @@ replace: {
 a [multi-task][multitask], meaning that it must contain targets, which you can 
 name anything you like.
 
-[multitask]: https://github.com/gruntjs/grunt/blob/master/docs/api.md#gruntregistermultitask
+[multitask]: https://github.com/gruntjs/grunt/wiki/Configuring-tasks#task-configuration-and-targets
 
 
 ### src
@@ -187,7 +187,7 @@ replace: {
 ```
 
 
-[grunt.template]: https://github.com/gruntjs/grunt/blob/master/docs/api_template.md
+[grunt.template]: https://github.com/gruntjs/grunt/wiki/grunt.template
 
 ## Road map
 Some changes I'm considering. Happy to receive suggestions for/against:
@@ -203,8 +203,9 @@ in alignment with the Grunt 4.0 convention of having standard 'files' and 'optio
 
 
 ## Release History
-- v0.3.1
- - 2013/02/18.  Minor feature addition: processTemplates: false to switch off grunt templates in function return statements.
+- v0.3.6 - 2013/06/21.  Updated links in docs, some of which were pointing to 404 pages.
+- v0.3.5 - 2013/06/19.  Minor clean up of docs & package.json. No functional changes since 0.3.1.
+- v0.3.1 - 2013/02/18.  Minor feature addition: processTemplates: false to switch off grunt templates in function return statements.
 - v0.3.0 - 2013/02/17.  Updated to work in Grunt 4.0. This release is not backwards compatible with grunt 0.3.x.
 - v0.2.10 - 2012/12/21.  Minor internal refactor to better support globally installed instances of grunt on some systems.
 - v0.2.9 - 2012/11/26.  Fixed issue where overwrite: true was not working where multiple src files were defined.
