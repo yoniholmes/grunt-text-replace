@@ -203,6 +203,7 @@ in alignment with the Grunt 4.0 convention of having standard 'files' and 'optio
 
 
 ## Release History
+- v0.3.8 - 2013/09/22.  Minor data checking issue, merged from pull request.
 - v0.3.7 - 2013/08/26.  Bumped grunt requirements from 0.4.0 to 0.4.1 due to [changes to path API](http://gruntjs.com/blog/2013-03-13-grunt-0.4.1-released). 
 - v0.3.6 - 2013/06/21.  Updated links in docs, some of which were pointing to 404 pages.
 - v0.3.5 - 2013/06/19.  Minor clean up of docs & package.json. No functional changes since 0.3.1.
@@ -224,5 +225,5 @@ significant bug fix. For more detail see the source.
 
 
 ## License
-Copyright (c) 2012 Jonathan Holmes  
+Copyright (c) 2013 Jonathan Holmes  
 Licensed under the MIT license.
