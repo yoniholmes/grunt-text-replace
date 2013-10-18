@@ -198,8 +198,8 @@ function parameters 'matchedWord', 'index', 'fullText' and 'regexMatches' with a
 - **Source/Destination paths in function callback**. The above change makes it easier to 
 add the source and destination paths as part of the data parameter in the function callback, 
 which is a requested feature.
-- **Grunt 4.0 'files' and 'options'**. At some point I might move to bringing the plugin
-in alignment with the Grunt 4.0 convention of having standard 'files' and 'options' objects. 
+- **Grunt 4.0 'options'**. At some point I might move to bringing the plugin
+in alignment with the Grunt 4.0 convention of having a standard 'options' object.
 
 
 ## Release History
