@@ -95,10 +95,10 @@ grunt-text-replace will throw an error if multiple source files are mapped to
 a single file. 
 
 
-
 ### overwrite
 
-*overwrite* is used if all you need to do is overwrite existing files. 
+*overwrite* should be used for in-place replacement, that is when all you need
+to do is overwrite existing files.
 To use it, omit *dest*, otherwise 
 grunt-text-replace will throw an error. You can only use one or the other. 
 
