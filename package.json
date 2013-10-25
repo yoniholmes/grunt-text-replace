@@ -1,7 +1,7 @@
 {
   "name": "grunt-text-replace",
   "description": "Replace text in files using strings, regexs or functions.",
-  "version": "0.3.8",
+  "version": "0.3.9",
   "homepage": "https://github.com/yoniholmes/grunt-text-replace",
   "author": "Jonathan Holmes",
   "repository": {
