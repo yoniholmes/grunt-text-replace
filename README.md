@@ -157,8 +157,7 @@ replacements: [{
 
 ### options
 
-*options* is an object, specific to a target, and the only supported option is 
-*processTemplates*
+*options* is an object, specific to a target, currently supports these settings:
 
 #### processTemplates
 
@@ -186,8 +185,51 @@ replace: {
 }
 ```
 
-
 [grunt.template]: https://github.com/gruntjs/grunt/wiki/grunt.template
+
+#### forceOverwrite
+
+**forceOverwrite** when set to true (by default it is false) force overwrites the 
+file even if the result(after replacing) is identical with the source(before replacing).
+
+```javascript
+replace: {
+  foceCopy_example: {
+    src: ['text/*.txt'],
+    overwrite: true,
+    options: {
+      forceOverwrite: true
+    },
+    replacements: [{ 
+      from: 'foo',
+      to: 'bar'
+    }]
+  }
+}
+```
+
+#### forceCopy
+
+**forceCopy** when set to false (by default it is true) prevents from copying when the
+result(after replacing) is identical with the source(before replacing).
+
+```javascript
+replace: {
+  foceCopy_example: {
+    src: ['text/*.txt'],
+    dest: 'build/text/',
+    options: {
+      forceCopy: false
+    },
+    replacements: [{ 
+      from: 'foo',
+      to: 'bar'
+    }]
+  }
+}
+```
+
+
 
 ## Road map
 Some changes I'm considering. Happy to receive suggestions for/against:
