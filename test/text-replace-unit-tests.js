@@ -30,8 +30,10 @@ var replaceFile = function (pathToSourceFile, pathToDestinationFile, replacement
 
 var replaceFileMultiple = function (sourceFiles, destinationDirectory, replacements) {
   return gruntTextReplace.replaceFileMultiple({
-    src: sourceFiles,
-    dest: destinationDirectory,
+    files: grunt.task.normalizeMultiTaskFiles({
+      src: sourceFiles,
+      dest: destinationDirectory
+    }),
     replacements: replacements
   });
 };
