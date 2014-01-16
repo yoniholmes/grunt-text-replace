@@ -46,6 +46,7 @@ exports.textReplace = {
       test.equal(replaceText('Hello \\foo', '\\', ''), 'Hello foo');
       test.equal(replaceText('Foo bar bar', 'bar', 'foo'), 'Foo foo foo');
       test.equal(replaceText('Foo bar bar', 'bar', 'Foo bar'), 'Foo Foo bar Foo bar');
+      test.equal(replaceText('Foo bar baz', ' bar', ''), 'Foo baz');
       test.done();
     },
 
@@ -92,6 +93,18 @@ exports.textReplace = {
         function (matchedWord, index, fullText, regexMatches) {
           return regexMatches[0] + ' <%= grunt.template.date("20 Nov 2012 11:30:00 GMT", "dd/mm/yy") %>';
         }), 'Hello 20/11/12');
+      test.done();
+    },
+
+    'Test other arguments types': function (test) {
+      test.equal(replaceText('Hello 0 true 1 false 2345', 'true', false), 'Hello 0 false 1 false 2345');
+      test.equal(replaceText('Hello 0 true 1 false 2345', 'false', true), 'Hello 0 true 1 true 2345');
+      test.equal(replaceText('Hello 0 true 1 false 2345', '1', 22), 'Hello 0 true 22 false 2345');
+      test.equal(replaceText('Hello 0 true 1 false 2345', '0', 1), 'Hello 1 true 1 false 2345');
+      test.equal(replaceText('Hello 0 true 1 false 2345', /true|false/g, 0), 'Hello 0 0 1 0 2345');
+      test.equal(replaceText('Hello 0 true 1 false 2345', 'Hello', 1e5), '100000 0 true 1 false 2345');
+      test.equal(replaceText('Hello 0 true 1 false 2345', 'Hello', null), ' 0 true 1 false 2345');
+      test.equal(replaceText('Hello 0 true 1 false 2345', 'true', undefined), 'Hello 0  1 false 2345');
       test.done();
     },
 
