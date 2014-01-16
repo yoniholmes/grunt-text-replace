@@ -95,6 +95,16 @@ exports.textReplace = {
       test.done();
     },
 
+    'Test other arguments types': function (test) {
+      test.equal(replaceText('Hello 0 true 1 false 2345', 'true', false), 'Hello 0 false 1 false 2345');
+      test.equal(replaceText('Hello 0 true 1 false 2345', 'false', true), 'Hello 0 true 1 true 2345');
+      test.equal(replaceText('Hello 0 true 1 false 2345', '1', 22), 'Hello 0 true 22 false 2345');
+      test.equal(replaceText('Hello 0 true 1 false 2345', '0', 1), 'Hello 1 true 1 false 2345');
+      test.equal(replaceText('Hello 0 true 1 false 2345', /true|false/g, 0), 'Hello 0 0 1 0 2345');
+      test.equal(replaceText('Hello 0 true 1 false 2345', 'Hello', 1e5), '100000 0 true 1 false 2345');
+      test.done();
+    },
+
     'Test multiple replacements': function (test) {
       test.equal(replaceTextMultiple('Hello world',
         [{
