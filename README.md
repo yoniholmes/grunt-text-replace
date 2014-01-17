@@ -194,7 +194,7 @@ file even if the result(after replacing) is identical with the source(before rep
 
 ```javascript
 replace: {
-  foceCopy_example: {
+  forceCopy_example: {
     src: ['text/*.txt'],
     overwrite: true,
     options: {
@@ -215,7 +215,7 @@ result(after replacing) is identical with the source(before replacing).
 
 ```javascript
 replace: {
-  foceCopy_example: {
+  forceCopy_example: {
     src: ['text/*.txt'],
     dest: 'build/text/',
     options: {
