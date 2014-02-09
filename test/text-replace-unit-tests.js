@@ -46,7 +46,6 @@ exports.textReplace = {
       test.equal(replaceText('Hello \\foo', '\\', ''), 'Hello foo');
       test.equal(replaceText('Foo bar bar', 'bar', 'foo'), 'Foo foo foo');
       test.equal(replaceText('Foo bar bar', 'bar', 'Foo bar'), 'Foo Foo bar Foo bar');
-      test.equal(replaceText('Foo bar baz', ' bar', ''), 'Foo baz');
       test.done();
     },
 
@@ -96,7 +95,7 @@ exports.textReplace = {
       test.done();
     },
 
-    'Test other arguments types': function (test) {
+    'Test non string or function "to" replacements': function (test) {
       test.equal(replaceText('Hello 0 true 1 false 2345', 'true', false), 'Hello 0 false 1 false 2345');
       test.equal(replaceText('Hello 0 true 1 false 2345', 'false', true), 'Hello 0 true 1 true 2345');
       test.equal(replaceText('Hello 0 true 1 false 2345', '1', 22), 'Hello 0 true 22 false 2345');
