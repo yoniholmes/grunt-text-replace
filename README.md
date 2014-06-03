@@ -201,7 +201,7 @@ replace: {
 ```
 
 
-[grunt.template]: https://github.com/gruntjs/grunt/wiki/grunt.template
+[grunt.template]: http://gruntjs.com/api/grunt.template
 
 ## Road map
 Some changes I'm considering. Happy to receive suggestions for/against:
