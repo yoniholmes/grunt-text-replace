@@ -20,6 +20,7 @@ module.exports = function(grunt) {
     'text in files using strings, regexs or functions.',
     function () {
       gruntTextReplace.replace({
+        options: this.options(),
         src: this.data.src,
         dest: this.data.dest,
         overwrite: this.data.overwrite,
