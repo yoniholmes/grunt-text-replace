@@ -139,6 +139,7 @@ Where *to* is a function, the function receives 4 parameters:
 4. **regexMatches**:  an array containing all regex matches, empty if none
 defined or found.
 
+Moreover, if you need access to the path of the current file being processed, or to the replacement destination path, they are available in the function scope as `this.pathToSourceFile` and `this.pathToDestinationFile`.
 
 ```javascript
 // Where the original source file text is:  "Hello world"
