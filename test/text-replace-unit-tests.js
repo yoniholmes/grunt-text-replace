@@ -1,7 +1,7 @@
 var grunt = require('grunt');
 var fs = require('fs');
 var gruntTextReplace = require('../lib/grunt-text-replace');
-
+var sinon = require('sinon');
 
 var replaceText = function (text, from, to) {
   return gruntTextReplace.replaceText({
@@ -124,6 +124,7 @@ exports.textReplace = {
     setUp: function (done) {
       grunt.file.copy('test/text_files/test.txt', 'test/temp/testA.txt');
       grunt.file.copy('test/text_files/test.txt', 'test/temp/testB.txt');
+      sinon.spy(grunt.file, "copy");
       done();
     },
 
@@ -131,6 +132,7 @@ exports.textReplace = {
       fs.unlinkSync('test/temp/testA.txt');
       fs.unlinkSync('test/temp/testB.txt');
       fs.rmdirSync('test/temp');
+      grunt.file.copy.restore();
       done();
     },
 
@@ -141,6 +143,22 @@ exports.textReplace = {
       replacedText = grunt.file.read('test/temp/testA.txt');
       test.equal(originalText, 'Hello world');
       test.equal(replacedText, 'Hello planet');
+      test.done();
+    },
+
+    'Test files do not get changed if there are no matches and paths are the same': function (test) {
+      replaceFile('test/temp/testA.txt', 'test/temp/testA.txt', [{from: 'world', to: 'planet'}]);
+      test.equal(grunt.file.copy.callCount, 1);
+      replaceFile('test/temp/testA.txt', 'test/temp/testA.txt', [{from: 'planet', to: 'planet'}]);
+      test.equal(grunt.file.copy.callCount, 1);
+      test.done();
+    },
+
+    'Test files get changed if there are no matches and paths are the different': function (test) {
+      replaceFile('test/temp/testA.txt', 'test/temp/testB.txt', [{from: 'world', to: 'planet'}]);
+      test.equal(grunt.file.copy.callCount, 1);
+      replaceFile('test/temp/testA.txt', 'test/temp/testB.txt', [{from: 'world', to: 'world'}]);
+      test.equal(grunt.file.copy.callCount, 2);
       test.done();
     },
 
