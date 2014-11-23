@@ -217,7 +217,7 @@ in alignment with the Grunt 4.0 convention of having standard 'files' and 'optio
 
 
 ## Release History
-- v0.3.13 - 2014/11/23.  Rewrote internals to prevent grunt-text-replace from make file changes where none are required. This was causing people difficulty with watch tasks.
+- v0.4.00 - 2014/11/23.  Dropping Node 0.8 support. Rewrote internals to prevent grunt-text-replace from make file changes where none are required. This was causing people difficulty with watch tasks.
 - v0.3.12 - 2014/06/03.  Minor update to docs - fix to a broken link.
 - v0.3.11 - 2014/02/09.  Added support for non-string or function 'to' replacements.
 - v0.3.10 - 2013/12/02.  Removed test for no source files found, accepting a pull request to do so. It's quite reasonable that you'd specify rewrite rules for files that may, or may not exist. Let me know if removing this is a problem for you.
