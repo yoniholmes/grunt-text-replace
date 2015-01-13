@@ -65,31 +65,66 @@ exports.textReplace = {
 
     'Test function replacements': function (test) {
       test.equal(replaceText('Hello world', 'world',
-        function (matchedWord, index, fullText, regexMatches) {
+        function (data) {
+          var matchedWord = data.matchedWord, 
+              index = data.index, 
+              fullText = data.fullText,
+              regexMatches = data.regexMatches, 
+              srcFile = data.src;
           return new Array(4).join(matchedWord);
         }), 'Hello worldworldworld');
       test.equal(replaceText('Hello world', 'world',
-        function (matchedWord, index, fullText, regexMatches) {
+        function (data) {
+          var matchedWord = data.matchedWord, 
+              index = data.index, 
+              fullText = data.fullText,
+              regexMatches = data.regexMatches, 
+              srcFile = data.src;
           return index;
         }), 'Hello 6');
       test.equal(replaceText('Hello world', 'Hello',
-        function (matchedWord, index, fullText, regexMatches) {
+        function (data) {
+          var matchedWord = data.matchedWord, 
+              index = data.index, 
+              fullText = data.fullText,
+              regexMatches = data.regexMatches, 
+              srcFile = data.src;
           return index;
         }), '0 world');
       test.equal(replaceText('Hello world', 'foo',
-        function (matchedWord, index, fullText, regexMatches) {
+        function (data) {
+          var matchedWord = data.matchedWord, 
+              index = data.index, 
+              fullText = data.fullText,
+              regexMatches = data.regexMatches, 
+              srcFile = data.src;
           return index;
         }), 'Hello world');
       test.equal(replaceText('Hello world', 'world',
-        function (matchedWord, index, fullText, regexMatches) {
+        function (data) {
+          var matchedWord = data.matchedWord, 
+              index = data.index, 
+              fullText = data.fullText,
+              regexMatches = data.regexMatches, 
+              srcFile = data.src;
           return fullText;
         }), 'Hello Hello world');
       test.equal(replaceText('Hello world', /(Hello) (world)/g,
-        function (matchedWord, index, fullText, regexMatches) {
+        function (data) {
+          var matchedWord = data.matchedWord, 
+              index = data.index, 
+              fullText = data.fullText,
+              regexMatches = data.regexMatches, 
+              srcFile = data.src;
           return 'Place: ' + regexMatches[1] + ', Greeting: ' + regexMatches[0];
         }), 'Place: world, Greeting: Hello');
       test.equal(replaceText('Hello world', /(Hello) (world)/g,
-        function (matchedWord, index, fullText, regexMatches) {
+        function (data) {
+          var matchedWord = data.matchedWord, 
+              index = data.index, 
+              fullText = data.fullText,
+              regexMatches = data.regexMatches, 
+              srcFile = data.src;
           return regexMatches[0] + ' <%= grunt.template.date("20 Nov 2012 11:30:00 GMT", "dd/mm/yy") %>';
         }), 'Hello 20/11/12');
       test.done();
@@ -203,7 +238,13 @@ exports.textReplace = {
       originalTextA = grunt.file.read('test/temp/testA.txt');
       originalTextC = grunt.file.read('test/temp/testC.txt');
       replaceFileMultiple(['test/temp/testA.txt', 'test/temp/testC.txt'], 'test/temp/', [{from: 'world', 
-        to: function(matchedWord, index, fullText, regexMatches, srcFile){
+        to: function(data){
+          var matchedWord = data.matchedWord, 
+              index = data.index, 
+              fullText = data.fullText,
+              regexMatches = data.regexMatches, 
+              srcFile = data.src;
+
           if(srcFile === 'test/temp/testC.txt'){
             return 'planet';
           }
