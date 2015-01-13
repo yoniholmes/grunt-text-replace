@@ -124,6 +124,7 @@ exports.textReplace = {
     setUp: function (done) {
       grunt.file.copy('test/text_files/test.txt', 'test/temp/testA.txt');
       grunt.file.copy('test/text_files/test.txt', 'test/temp/testB.txt');
+      grunt.file.copy('test/text_files/test.txt', 'test/temp/testC.txt');
       sinon.spy(grunt.file, "copy");
       done();
     },
@@ -131,6 +132,7 @@ exports.textReplace = {
     tearDown: function (done) {
       fs.unlinkSync('test/temp/testA.txt');
       fs.unlinkSync('test/temp/testB.txt');
+      fs.unlinkSync('test/temp/testC.txt');
       fs.rmdirSync('test/temp');
       grunt.file.copy.restore();
       done();
@@ -193,6 +195,27 @@ exports.textReplace = {
       test.equal(originalText, 'Hello world');
       test.equal(replacedTextA, 'Hello planet');
       test.equal(replacedTextB, 'Hello planet');
+      test.done();
+    },
+
+    'Test file gets changed according to src file': function (test) {
+      var originalTextA, originalTextC, replacedTextA, replacedTextB;
+      originalTextA = grunt.file.read('test/temp/testA.txt');
+      originalTextC = grunt.file.read('test/temp/testC.txt');
+      replaceFileMultiple(['test/temp/testA.txt', 'test/temp/testC.txt'], 'test/temp/', [{from: 'world', 
+        to: function(matchedWord, index, fullText, regexMatches, srcFile){
+          if(srcFile === 'test/temp/testC.txt'){
+            return 'planet';
+          }
+          else{
+            return matchedWord;
+          }
+        }
+      }]);
+      replacedTextA = grunt.file.read('test/temp/testA.txt');
+      replacedTextC = grunt.file.read('test/temp/testC.txt');
+      test.equal(originalTextA, replacedTextA);
+      test.equal('Hello planet', replacedTextC);
       test.done();
     }
 
