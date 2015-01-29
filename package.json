@@ -1,7 +1,7 @@
 {
   "name": "grunt-match-replace",
   "description": "Replace text in files using strings, regexs or functions. Forked from yoniholmes/grunt-text-replace 0.4.0",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "https://github.com/slanders770/grunt-match-replace",
   "author": "Jonathan Holmes, Scott Landers",
   "repository": {
