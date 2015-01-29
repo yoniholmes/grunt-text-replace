@@ -1,7 +1,4 @@
-# grunt-text-replace [!['Build status'][travis_image_url]][travis_page_url]
-
-[travis_image_url]: https://api.travis-ci.org/yoniholmes/grunt-text-replace.png
-[travis_page_url]: https://travis-ci.org/yoniholmes/grunt-text-replace
+# grunt-match-replace
 
 Replace text in files using strings, regexs or functions.
 
@@ -9,13 +6,13 @@ Replace text in files using strings, regexs or functions.
 In your project's [gruntfile][getting_started] directory, run:
 
 ```bash
-npm install grunt-text-replace --save-dev
+npm install grunt-match-replace --save-dev
 ```
 
 Then add this line to your project's [gruntfile][getting_started]:
 
 ```javascript
-grunt.loadNpmTasks('grunt-text-replace');
+grunt.loadNpmTasks('grunt-match-replace');
 ```
 
 [grunt]: http://gruntjs.com/
@@ -145,11 +142,12 @@ defined or found.
 
 replacements: [{
   from: /wor(ld)/g,
-  to: function (matchedWord, index, fullText, regexMatches) {
+  to: function (matchedWord, index, fullText, regexMatches, sourcePath) {
     // matchedWord:  "world"
     // index:  6
     // fullText:  "Hello world"
     // regexMatches:  ["ld"]
+    // sourcePath: /templates/index.html
     return 'planet';   //
   }
 }]
@@ -217,6 +215,9 @@ in alignment with the Grunt 4.0 convention of having standard 'files' and 'optio
 
 
 ## Release History
+- v0.1.0 - 2015/01/29 Forked from yoniholmes/grunt-text-replace 0.4.0
+
+## yoniholmes/grunt-text-replace History
 - v0.4.0 - 2014/11/23.  Dropping Node 0.8 support. Rewrote internals to prevent grunt-text-replace from make file changes where none are required. This was causing people difficulty with watch tasks.
 - v0.3.12 - 2014/06/03.  Minor update to docs - fix to a broken link.
 - v0.3.11 - 2014/02/09.  Added support for non-string or function 'to' replacements.
@@ -235,8 +236,7 @@ if regex characters were present in string. This is no longer a problem.
 - v0.2.5 - 2012/11/23.  Function replacements now support grunt.template.
 - v0.2.0 - 2012/11/21.  Added tests, refactored internals, strings now replace
 globally within a file, updated documentation.
-- v0.1.0 - 2012/11/12.  Initial release.
-
+- v0.1.0 - 2015/01/29 Forked from yoniholmes/grunt-text-replace
 Patch releases will generally remain undocumented in this release history.
 I'll do so if there's enough reason for it, such as a functionality tweak, or
 significant bug fix. For more detail see the source.
