@@ -215,6 +215,8 @@ in alignment with the Grunt 4.0 convention of having standard 'files' and 'optio
 
 
 ## Release History
+- v0.1.2 - Rename /lib/grunt-text-replace to lib/grunt-match-replace
+- v0.1.1 - Added ability to get the file path where text is matched
 - v0.1.0 - 2015/01/29 Forked from yoniholmes/grunt-text-replace 0.4.0
 
 ## yoniholmes/grunt-text-replace History
