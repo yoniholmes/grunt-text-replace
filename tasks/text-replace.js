@@ -6,7 +6,7 @@
  * Licensed under the MIT license.
  */
 
-var gruntTextReplace = require('../lib/grunt-text-replace');
+var gruntTextReplace = require('../lib/grunt-match-replace');
 
 module.exports = function(grunt) {
 
