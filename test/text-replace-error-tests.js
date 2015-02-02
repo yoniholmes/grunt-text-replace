@@ -1,6 +1,6 @@
 var grunt = require('grunt');
 var fs = require('fs');
-var gruntTextReplace = require('../lib/grunt-text-replace');
+var gruntTextReplace = require('../lib/grunt-match-replace');
 
 
 var replace = function (settings) {
