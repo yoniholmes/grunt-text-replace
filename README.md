@@ -62,6 +62,24 @@ replace: {
 }
 ```
 
+Here's another example using the expand option
+
+```javascript
+replace: {
+  another_example: {
+    options: {
+      expand: true
+    },
+    src: ['build/**/*.html'],
+    dest: 'dist/',
+    replacements: [{
+      from: /[0-9]{1,2}\/[0-9]{1,2}\/[0-9]{2,4}/g,
+      to: "<%= grunt.template.today('dd/mm/yyyy') %>"
+    }]
+  }
+}
+```
+
 
 
 ## API reference
@@ -75,6 +93,9 @@ name anything you like.
 
 [multitask]: https://github.com/gruntjs/grunt/wiki/Configuring-tasks#task-configuration-and-targets
 
+### expand
+
+*expand* will create the destination path in full
 
 ### src
 
