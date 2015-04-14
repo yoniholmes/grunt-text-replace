@@ -131,14 +131,15 @@ grunt-text-replace will throw an error. You can only use one or the other.
 
 
 #### function
-Where *to* is a function, the function receives 4 parameters:
+Where *to* is a function, the function receives 6 parameters:
 
 1. **matchedWord**:  the matched word
 2. **index**:  an integer representing point where word was found in a text
 3. **fullText**:  the full original text
 4. **regexMatches**:  an array containing all regex matches, empty if none
-defined or found.
-
+defined or found
+5. **sourceFilePath**: the processing source file path
+6. **destinationFilePath**: the processing destination file path.
 
 ```javascript
 // Where the original source file text is:  "Hello world"
