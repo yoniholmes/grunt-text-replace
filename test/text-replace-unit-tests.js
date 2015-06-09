@@ -194,6 +194,20 @@ exports.textReplace = {
       test.equal(replacedTextA, 'Hello planet');
       test.equal(replacedTextB, 'Hello planet');
       test.done();
+    },
+
+    'Test function as destination': function (test) {
+      var originalText, replacedTextA, replacedTextB;
+      originalText = grunt.file.read('test/temp/testA.txt');
+      replaceFileMultiple(['test/temp/test*.txt'], function (input) {
+        return input + '.foo';
+      }, [{from: 'world', to: 'planet'}]);
+      replacedTextA = grunt.file.read('test/temp/testA.txt.foo');
+      replacedTextB = grunt.file.read('test/temp/testB.txt.foo');
+      test.equal(originalText, 'Hello world');
+      test.equal(replacedTextA, 'Hello planet');
+      test.equal(replacedTextB, 'Hello planet');
+      test.done();
     }
 
   }

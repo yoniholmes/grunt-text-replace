@@ -90,6 +90,9 @@ It supports [minimatch][minimatch] paths.
 
 - file: `'path/output.txt'`
 - directory: `'path/'`
+- function: ```function (input) {
+  return input;
+}```
 
 grunt-text-replace will throw an error if multiple source files are mapped to
 a single file.
