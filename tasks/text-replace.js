@@ -19,11 +19,14 @@ module.exports = function(grunt) {
     'General purpose text replacement for grunt. Allows you to replace ' +
     'text in files using strings, regexs or functions.',
     function () {
-      gruntTextReplace.replace({
-        src: this.data.src,
-        dest: this.data.dest,
-        overwrite: this.data.overwrite,
-        replacements: this.data.replacements
+      var data = this.data;
+      var srcFiles = this.files.forEach(function(elem){
+        gruntTextReplace.replace({
+          src: elem.src,
+          dest: elem.dest,
+          overwrite: data.overwrite,
+          replacements: data.replacements
+        });
       });
     });
 };
