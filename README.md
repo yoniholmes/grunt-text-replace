@@ -100,7 +100,7 @@ a single file.
 *overwrite* should be used for in-place replacement, that is when all you need
 to do is overwrite existing files.
 To use it, omit *dest*, otherwise
-grunt-text-replace will throw an error. You can only use one or the other. 
+grunt-text-replace will throw an error. You can only use one or the other.
 
 
 ### replacements
@@ -203,6 +203,13 @@ replace: {
 
 
 [grunt.template]: http://gruntjs.com/api/grunt.template
+
+
+### files formats
+Files formats are defined by grunt, see [Grunt Configuration]
+
+[Grunt Configuration]: http://gruntjs.com/configuring-tasks
+
 
 ## Road map
 Some changes I'm considering. Happy to receive suggestions for/against:
