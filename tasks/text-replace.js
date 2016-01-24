@@ -20,7 +20,7 @@ module.exports = function(grunt) {
     'text in files using strings, regexs or functions.',
     function () {
       var data = this.data;
-      var srcFiles = this.files.forEach(function(elem){
+      this.files.forEach(function(elem){
         gruntTextReplace.replace({
           src: elem.src,
           dest: elem.dest,
