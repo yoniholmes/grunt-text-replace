@@ -19,8 +19,13 @@ module.exports = function(grunt) {
     'General purpose text replacement for grunt. Allows you to replace ' +
     'text in files using strings, regexs or functions.',
     function () {
+	  var srcs = this.data.src;
+	  if (!srcs && this.data.files)
+        srcs = Array.prototype.concat.apply([], this.data.files.map(function(filesHash){
+          return filesHash.src
+        }));
       gruntTextReplace.replace({
-        src: this.data.src,
+        src: srcs,
         dest: this.data.dest,
         overwrite: this.data.overwrite,
         replacements: this.data.replacements
